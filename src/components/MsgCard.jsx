@@ -16,7 +16,7 @@ export default function MsgCard(props) {
 
   return (
     <div>
-      {!loading && (
+      {bootloader && (
         <div>
           <Card>
             <CardContent>
