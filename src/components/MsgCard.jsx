@@ -8,21 +8,14 @@ import {
 import React from "react";
 
 export default function MsgCard(props) {
-  const [loading, setLoading] = React.useState(false);
-  const { bootloader, process } = props;
+  const { bootloader, process, loading } = props;
   const sampleJSON = {
     object: process,
-  };
-  const handleClickLoading = () => {
-    setLoading((prevLoading) => !prevLoading);
   };
   const booli = false;
 
   return (
     <div>
-      <Button onClick={handleClickLoading}>
-        {loading ? "Stop loading" : "Loading"}
-      </Button>
       {!loading && (
         <div>
           <Card>

@@ -66,16 +66,17 @@ const UpdateProgram = () => {
         setbootloader(reply.message);
       }
     });
-  }, []);
+  }, [bootloader]);
   // bootloader:
   useEffect(() => {
     socket.on("execute_command_process_response", (reply) => {
       if (reply) {
         setprocess(reply);
       } else {
+        setprocess(reply);
       }
     });
-  }, []);
+  }, [process]);
 
   // other:
   useEffect(() => {
@@ -113,8 +114,10 @@ const UpdateProgram = () => {
   useEffect(() => {
     socket.on("execute_command_response", (reply) => {
       if (reply.success === "true") {
+        setloading(false);
         setusermsg(reply.message);
       } else {
+        setloading(false);
         setusermsg(reply.message);
       }
     });
@@ -138,6 +141,7 @@ const UpdateProgram = () => {
         if (!isAddress) {
           setusermsg("empty field");
         } else {
+          setloading(true);
           socket.emit("execute_command", {
             port_name: stateCommandsPortsV,
             controller_name: stateControllersV,
@@ -149,6 +153,7 @@ const UpdateProgram = () => {
         if (!isSectorsNumbers || !isNumberOfSectors) {
           setusermsg("empty field");
         } else {
+          setloading(true);
           socket.emit("execute_command", {
             port_name: stateCommandsPortsV,
             controller_name: stateControllersV,
@@ -163,7 +168,7 @@ const UpdateProgram = () => {
         if (!isFileName || !isAddress) {
           setusermsg("empty field");
         } else {
-          alert(isFileName)
+          setloading(true);
           socket.emit("execute_command", {
             port_name: stateCommandsPortsV,
             controller_name: stateControllersV,
@@ -178,6 +183,7 @@ const UpdateProgram = () => {
         if (!isTotalSector || !isListOfSector || !isMode) {
           setusermsg("empty field");
         } else {
+          setloading(true);
           socket.emit("execute_command", {
             port_name: stateCommandsPortsV,
             controller_name: stateControllersV,
@@ -193,7 +199,7 @@ const UpdateProgram = () => {
         if (!stateCommandsPorts || !stateControllers || !stateCommandsV) {
           setusermsg("empty field");
         } else {
-          alert(stateCommandsPortsV);
+          setloading(true);
           socket.emit("execute_command", {
             port_name: stateCommandsPortsV,
             // port_name: "COM3",
@@ -306,8 +312,12 @@ const UpdateProgram = () => {
             <Typography component="h1" variant="h5">
               System msg:
             </Typography>
-            <br/>
-            <MsgCard bootloader={bootloader} process={process} />
+            <br />
+            <MsgCard
+              bootloader={bootloader}
+              process={process}
+              loading={loading}
+            />
           </div>
         </Grid>
       </Grid>
