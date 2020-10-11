@@ -5,7 +5,7 @@ export default function UploadFile(props) {
 
   // Handles file upload event and updates state
   function handleUpload(event) {
-    props.setFile(event.target.files[0]);
+    props.setFile(event.target.files[0].path);
     // Add code here to upload file to server
     // ...
   }
@@ -13,7 +13,7 @@ export default function UploadFile(props) {
     <div>
       <div id="upload-box">
         <input type="file" onChange={handleUpload} />
-        <p>Filename: {props.file.name}</p>
+        <p>FilePath: {props.file}</p>
       </div>
     </div>
   );

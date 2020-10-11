@@ -55,24 +55,28 @@ const UpdateProgram = () => {
   const [listofNumbers2, setlistofNumbers2] = useState([""]);
   const [process, setprocess] = useState([""]);
   const [bootloader, setbootloader] = useState([""]);
+  const [loading, setloading] = useState(false);
 
-  // bootloader:
-  useEffect(() => {
-    socket.on("execute_command_process_response", (reply) => {
-      if (reply) {
-      } else {
-      }
-    });
-  }, []);
   // prosess:
   useEffect(() => {
     socket.on("execute_command_bootloader_response", (reply) => {
       if (reply) {
         setbootloader(reply.message);
       } else {
+        setbootloader(reply.message);
       }
     });
   }, []);
+  // bootloader:
+  useEffect(() => {
+    socket.on("execute_command_process_response", (reply) => {
+      if (reply) {
+        setprocess(reply);
+      } else {
+      }
+    });
+  }, []);
+
   // other:
   useEffect(() => {
     socket.on("list_of_commands_response", (reply) => {
@@ -155,10 +159,11 @@ const UpdateProgram = () => {
             },
           });
         }
-      } else if (stateCommandsV === "'BL_MEM_WRITE") {
+      } else if (stateCommandsV === "BL_MEM_WRITE") {
         if (!isFileName || !isAddress) {
           setusermsg("empty field");
         } else {
+          alert(isFileName)
           socket.emit("execute_command", {
             port_name: stateCommandsPortsV,
             controller_name: stateControllersV,
@@ -298,6 +303,10 @@ const UpdateProgram = () => {
         <Grid item xs={6}>
           <CssBaseline />
           <div className={classes.paper}>
+            <Typography component="h1" variant="h5">
+              System msg:
+            </Typography>
+            <br/>
             <MsgCard bootloader={bootloader} process={process} />
           </div>
         </Grid>

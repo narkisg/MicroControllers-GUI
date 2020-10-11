@@ -68,6 +68,7 @@ export default function NewUser() {
       setusermsg(reply.message);
       // then:
     } else {
+      alert("hi")
       setusermsg(reply.message);
     }
   });
