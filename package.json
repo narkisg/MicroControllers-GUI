@@ -1,0 +1,72 @@
+{
+  "name": "adi-nevo-ziv",
+  "homepage": "./",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "^4.9.14",
+    "@material-ui/icons": "4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.56",
+    "babel-runtime": "^6.26.0",
+    "cross-env": "^7.0.2",
+    "electron-is-dev": "^1.2.0",
+    "formik": "^2.1.5",
+    "formik-material-ui": "^3.0.0",
+    "formik-material-ui-lab": "0.0.5",
+    "material-ui": "^1.0.0-beta.47",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-router-dom": "^5.2.0",
+    "socket.io-client": "^2.3.0",
+    "styled-components": "^5.2.0",
+    "tree-kill": "^1.2.2",
+    "uuid": "^3.4.0",
+    "yup": "^0.29.3"
+  },
+  "devDependencies": {
+    "concurrently": "^5.3.0",
+    "electron": "^10.1.2",
+    "electron-builder": "^22.8.1",
+    "react-scripts": "2.1.8",
+    "wait-on": "^5.2.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "electron build": "electron-builder",
+    "dep-win": "npm run build && electron-builder --win",
+    "dep-mac": "npm run build && electron-builder --mac",
+    "el-dev": "concurrently \"set BROWSER=none&&npm start\" \"wait-on http://localhost:3000 && electron .\""
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "main": "public/electron.js",
+  "build": {
+    "appId": "com.nevo.netafim-rc",
+    "files": [
+      "build/**/*",
+      "node_modules/**/*"
+    ],
+    "extraFiles": [
+      {
+        "from": "public",
+        "to": "",
+        "filter": [
+          "py-server.exe",
+          "database.json"
+        ]
+      }
+    ],
+    "directories": {
+      "buildResources": "assets"
+    }
+  }
+}
