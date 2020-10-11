@@ -8,7 +8,7 @@ import {
 import React from "react";
 
 export default function MsgCard(props) {
-  const { bootloader, process, loading } = props;
+  const { bootloader, process, loading,mycommand } = props;
   const sampleJSON = {
     object: process,
   };
@@ -16,11 +16,13 @@ export default function MsgCard(props) {
 
   return (
     <div>
-      {bootloader && (
+      {!loading && (
         <div>
           <Card>
             <CardContent>
               <div>
+                <h3>command:</h3>
+                <p> {mycommand}</p>
                 <h3>process arguments: </h3>
                 {/* text */}
                 {Object.keys(sampleJSON.object).map((key, i) => (

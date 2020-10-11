@@ -62,13 +62,11 @@ export default function NewUser() {
     setState({ ...state, [e.target.name]: e.target.value });
   };
 
-  socket.on("register_user_response", (reply) => {
+  socket.on("register_response", (reply) => {
     if (reply.success === "true") {
-      // moving to a difrent page:
       setusermsg(reply.message);
-      // then:
     } else {
-      alert("hi")
+
       setusermsg(reply.message);
     }
   });
@@ -85,7 +83,7 @@ export default function NewUser() {
     if (password != passwordConfirm) {
       setusermsg("password error");
     } else if (authcode != authcodeConfirm) {
-      setusermsg("password error");
+      setusermsg("auth error");
     } else if (
       !username ||
       !password ||
@@ -176,6 +174,8 @@ export default function NewUser() {
                   onChange={(e) => onInputChange(e)}
                   value={state.authcodeConfirm}
                 />
+
+
               </Grid>
             </Grid>
             <h5>{usermsg}</h5>

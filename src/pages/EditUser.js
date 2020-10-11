@@ -46,7 +46,9 @@ const useStyles = makeStyles((theme) => ({
 const optionsController = ["optionsController 1", "optionsCommand 2"];
 export default function EditUser() {
   const classes = useStyles();
-  const [usermsg, setusermsg] = useState("");
+  const [usermsg1, setusermsg1] = useState("");
+  const [usermsg2, setusermsg2] = useState("");
+  const [usermsg3, setusermsg3] = useState("");
 
   const [state, setState] = useState({ username: "", password: "" });
   const [age, setAge] = React.useState("");
@@ -69,32 +71,32 @@ export default function EditUser() {
 
   socket.on("change_authorization_response", (reply) => {
     if (reply.success === "true") {
-      setusermsg(reply.message);
+      setusermsg1(reply.message);
     } else {
-      setusermsg(reply.message);
+      setusermsg1(reply.message);
     }
   });
 
   socket.on("change_password_response", (reply) => {
     if (reply.success === "true") {
-      setusermsg(reply.message);
+      setusermsg2(reply.message);
     } else {
-      setusermsg(reply.message);
+      setusermsg2(reply.message);
     }
   });
 
   socket.on("change_username_response", (reply) => {
     if (reply.success === "true") {
-      setusermsg(reply.message);
+      setusermsg3(reply.message);
     } else {
-      setusermsg(reply.message);
+      setusermsg3(reply.message);
     }
   });
   const onSubmitFunc = (e) => {
     e.preventDefault();
     // if no user name:
     if (!userValue) {
-      setusermsg("empty field");
+      setusermsg1("empty field");
     } else {
       // if username:
       if (age) {
@@ -181,15 +183,15 @@ export default function EditUser() {
                   variant="outlined"
                   className={classes.formControl}>
                   <InputLabel id="demo-simple-select-outlined-label">
-                    user authorization
+                    new user authorization (optional)
                   </InputLabel>
                   <Select
                     labelId="demo-simple-select-outlined-label"
                     id="demo-simple-select-outlined"
                     value={age}
                     onChange={handleChange}
-                    label="user
-                    authorization">
+                    label="new user
+                    authorization (optional)">
                     <MenuItem value={1}>simple user</MenuItem>
                     <MenuItem value={2}>developer</MenuItem>
                     <MenuItem value={3}>administrator</MenuItem>
@@ -197,7 +199,9 @@ export default function EditUser() {
                 </FormControl>
               </Grid>
             </Grid>
-            <h5>{usermsg}</h5>
+            <h5>{usermsg2}</h5>
+            <h5>{usermsg1}</h5>
+            <h5>{usermsg3}</h5>
             <Button
               type="submit"
               fullWidth

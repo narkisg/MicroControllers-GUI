@@ -142,13 +142,17 @@ export default function Commands(props) {
       {fields.includes("mode") && (
         <div>
           <br />{" "}
-          <TextField
-            variant="outlined"
-            fullWidth
-            id="mode"
-            label="mode"
-            name="mode"
-            onChange={(e) => props.setisMode(e.target.value)}
+          <Autocomplete
+              value={props.isMode}
+              fullWidth
+              onChange={(event, newValue) => {
+                props.setisMode(newValue);
+              }}
+              id="mode"
+              options={["1","0"]}
+              renderInput={(params) => (
+                  <TextField {...params} label="mode" variant="outlined" />
+              )}
           />
           <br />
         </div>
