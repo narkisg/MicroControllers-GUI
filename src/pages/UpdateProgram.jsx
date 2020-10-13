@@ -14,7 +14,7 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 import { Card, CardContent, TextField } from "@material-ui/core";
 import MsgCard from "../components/MsgCard";
 var socket;
-socket = io("http://localhost:5000");
+
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -58,37 +58,46 @@ const UpdateProgram = () => {
   const [loading, setloading] = useState(false);
   const [finishcode, setfinishcode] = useState(false);
 
+  // socket io:
+  useEffect(() => {
+    socket = io("http://localhost:5000");
+    return () => socket.disconnect()
+  }, []);
+
   // prosess:
   useEffect(() => {
     socket.on("execute_command_bootloader_response", (reply) => {
       if (reply) {
-        alert("execute_command_bootloader_response")
+        // alert("execute_command_bootloader_response")
         setfinishcode(true)
         setloading(false)
         setbootloader(reply.message);
       } else {
-        alert("execute_command_bootloader_response")
+        // alert("execute_command_bootloader_response")
         setfinishcode(true)
         setloading(false)
         setbootloader(reply.message);
       }
     });
+    return () => socket.off("execute_command_bootloader_response")
   }, []);
+
   // bootloader:
   useEffect(() => {
     socket.on("execute_command_process_response", (reply) => {
       if (reply) {
-        alert("eexecute_command_process_response")
+        // alert("eexecute_command_process_response")
         setfinishcode(true)
         setloading(false)
         setprocess(reply);
       } else {
-        alert("eexecute_command_process_response")
+        // alert("eexecute_command_process_response")
         setfinishcode(true)
         setloading(false)
         setprocess(reply);
       }
     });
+    return () => socket.off("execute_command_process_response")
   }, []);
 
   // other:
@@ -103,7 +112,9 @@ const UpdateProgram = () => {
         setusermsg("error");
       }
     });
+    return () => socket.off("list_of_commands_response")
   }, []);
+
   useEffect(() => {
     socket.on("list_of_controllers_response", (reply) => {
       if (reply) {
@@ -114,6 +125,7 @@ const UpdateProgram = () => {
         setusermsg("error");
       }
     });
+    return () => socket.off("list_of_controllers_response")
   }, []);
   useEffect(() => {
     socket.on("list_of_ports_response", (reply) => {
@@ -124,18 +136,21 @@ const UpdateProgram = () => {
         setusermsg("error");
       }
     });
+    return () => socket.off("list_of_ports_response")
   }, []);
   useEffect(() => {
     socket.on("execute_command_response", (reply) => {
       if (reply.success === "true") {
-        alert("execute_command_response")
+        // alert("execute_command_response")
         setusermsg(reply.message);
       } else {
 
         setusermsg(reply.message);
       }
     });
+    return () => socket.off("execute_command_response")
   }, []);
+
   useEffect(() => {
     socket.emit("get_list_of_commands", () => {});
   }, []);
