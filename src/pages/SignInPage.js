@@ -42,7 +42,9 @@ export default function LoginPage() {
   const classes = useStyles();
   const [state, setState] = useState({ username: "", password: "" });
 
+
   socket.on("login_response", (reply) => {
+
     if (reply.success === "true") {
       // moving to a difrent page:
       // alert(reply.message);
@@ -54,6 +56,7 @@ export default function LoginPage() {
   });
 
   const onSubmitFunc = (e) => {
+    console.log('====here =====')
     e.preventDefault();
     const { username, password } = state;
     socket.emit("login_attempt", {
@@ -108,7 +111,7 @@ export default function LoginPage() {
             label="Remember me"
           /> */}
           <Button
-            onClick="clickLogin"
+            onClick={onSubmitFunc}
             type="submit"
             fullWidth
             variant="contained"
