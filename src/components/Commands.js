@@ -38,21 +38,6 @@ export default function Commands(props) {
 
   return (
     <div>
-      {/* address: */}
-      {fields.includes("address") && (
-        <div>
-          {" "}
-          <TextField
-            variant="outlined"
-            fullWidth
-            id="address"
-            label="address"
-            name="address"
-            onChange={(e) => props.setisAddress(e.target.value)}
-          />
-          <br />
-        </div>
-      )}
       {/* sector_number: */}
       {fields.includes("sector_number") && (
         //   0-8

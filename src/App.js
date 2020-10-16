@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect  } from "react";
 import "./styles.css";
 import UpdateProgram from "./pages/UpdateProgram";
 import SignInPage from "./pages/SignInPage";
@@ -11,10 +11,15 @@ import { makeStyles } from "@material-ui/core/styles";
 import { useHistory } from "react-router-dom";
 import * as io from "socket.io-client";
 var socket;
-socket = io("http://localhost:5000");
+
 
 export default function App() {
   const history = useHistory();
+  useEffect(() => {
+    socket = io("http://localhost:5000");
+   return () => {socket.disconnect()}
+  }, []);
+
   useEffect(() => {
     socket.on("is_connected_response", (reply) => {
       if (reply.success === "false") {
@@ -22,6 +27,7 @@ export default function App() {
       }
     });
     socket.emit("is_connected");
+    return (()=> socket.off("is_connected_response"))
   }, []);
   return (
     <Theme>

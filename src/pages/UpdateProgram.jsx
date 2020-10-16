@@ -44,7 +44,6 @@ const UpdateProgram = () => {
   const [stateControllersV, setstateControllersV] = useState("");
   const [stateCommandsPortsV, setstateCommandsPortsV] = useState("");
 
-  const [isAddress, setisAddress] = useState("");
   const [isSectorsNumbers, setisSectorsNumbers] = useState("");
   const [isNumberOfSectors, setisNumberOfSectors] = useState("");
   const [isFileName, setisFileName] = useState("");
@@ -169,17 +168,12 @@ const UpdateProgram = () => {
     } else {
       setfinishcode(true)
       if (stateCommandsV === "BL_GO_TO_ADDR") {
-        if (!isAddress) {
-          setusermsg("empty field");
-        } else {
           setloading(true)
           socket.emit("execute_command", {
             port_name: stateCommandsPortsV,
             controller_name: stateControllersV,
             command_name: stateCommandsV,
-            additional_parameters: { address: isAddress },
-          });
-        }
+            additional_parameters: { address: '0' }})
       } else if (stateCommandsV === "BL_FLASH_ERASE") {
         if (!isSectorsNumbers || !isNumberOfSectors) {
           setusermsg("empty field");
@@ -196,7 +190,7 @@ const UpdateProgram = () => {
           });
         }
       } else if (stateCommandsV === "BL_MEM_WRITE") {
-        if (!isFileName || !isAddress) {
+        if (!isFileName) {
           setusermsg("empty field");
         } else {
           setloading(true)
@@ -206,7 +200,7 @@ const UpdateProgram = () => {
             command_name: stateCommandsV,
             additional_parameters: {
               file_name: isFileName,
-              address: isAddress,
+              address: '0',
             },
           });
         }
@@ -322,8 +316,6 @@ const UpdateProgram = () => {
                   setisFileName={setisFileName}
                   setisSectorsNumbers={setisSectorsNumbers}
                   isNumberOfSectors={isNumberOfSectors}
-                  isAddress={isAddress}
-                  setisAddress={setisAddress}
                   isSectorsNumbers={isSectorsNumbers}
                 />
                 <h5>{usermsg}</h5>
