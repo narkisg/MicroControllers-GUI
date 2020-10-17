@@ -52,7 +52,7 @@ const NavBar = (props) => {
           .map((item, index) => {
             const { text, userauthi, onClick } = item;
             return (
-              <Button color="primary" onClick={onClick}>
+              <Button color="primary" onClick={onClick} key={index}>
                 {text}
               </Button>
             );

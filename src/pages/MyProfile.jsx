@@ -12,7 +12,7 @@ import Typography from "@material-ui/core/Typography";
 import NavBar from "../components/NavBar";
 import * as io from "socket.io-client";
 var socket;
-socket = io("http://localhost:5000");
+
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
@@ -34,6 +34,8 @@ export default function BasicTable() {
     createData("Authorization", `${stateAuth}`),
   ];
   useEffect(() => {
+    socket = io("http://localhost:5000");
+
     socket.on("my_profile_response", (reply) => {
       var object = JSON.parse(reply);
       setstateUsername(object.username);
@@ -41,6 +43,10 @@ export default function BasicTable() {
       setstateAuth(object.authorization);
     });
     socket.emit("my_profile");
+    return () => {
+      socket.off("my_profile_response")
+      socket.disconnect()
+    }
   }, []);
 
   return (

@@ -45,7 +45,6 @@ export default function LoginPage() {
 
   useEffect(() => {
     socket.on("login_response", (reply) => {
-
       if (reply.success === "true") {
         // moving to a difrent page:
         // alert(reply.message);
@@ -56,7 +55,7 @@ export default function LoginPage() {
       }
     });
     return () => {
-      socket.on("login_response")
+      socket.off("login_response")
     }
 
   }, []);

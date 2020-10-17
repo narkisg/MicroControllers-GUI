@@ -4,11 +4,16 @@ import React, { useState, useEffect } from "react";
 import * as io from "socket.io-client";
 import UploadFile from "./UploadFile";
 var socket;
-socket = io("http://localhost:5000");
+
 
 export default function Commands(props) {
   const [fields, setFields] = useState([""]);
   const inputtext = props.currentcom;
+
+  useEffect(() => {
+    socket = io("http://localhost:5000");
+    return () => socket.disconnect()
+  }, []);
 
   useEffect(() => {
     var templist = [];
@@ -29,6 +34,7 @@ export default function Commands(props) {
         alert("error");
       }
     });
+    return () => socket.off("get_fields_response")
   }, []);
 
   useEffect(() => {

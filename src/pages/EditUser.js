@@ -55,43 +55,62 @@ export default function EditUser() {
   const [newUserName, setNewUserName] = React.useState("");
   const [newPassword, setnewPassword] = React.useState("");
   const [userValue, setUserValue] = useState("");
-  const [stateUsersList, setstateUsersList] = useState(["adi"]);
+  const [stateUsersList, setstateUsersList] = useState([]);
 
-  socket.on("list_of_users_response", (reply) => {
-    var list = JSON.parse(reply);
-    setstateUsersList(list);
-  });
+
+
+  useEffect(() => {
+    socket = io("http://localhost:5000");
+
+    socket.on("list_of_users_response", (reply) => {
+      var list = JSON.parse(reply);
+      setstateUsersList(list);
+    });
+
+    socket.on("change_authorization_response", (reply) => {
+      if (reply.success === "true") {
+        setusermsg1(reply.message);
+      } else {
+        setusermsg1(reply.message);
+      }
+    });
+
+    socket.on("change_password_response", (reply) => {
+      if (reply.success === "true") {
+        setusermsg2(reply.message);
+      } else {
+        setusermsg2(reply.message);
+      }
+    });
+
+    socket.on("change_username_response", (reply) => {
+      if (reply.success === "true") {
+        setusermsg3(reply.message);
+      } else {
+        setusermsg3(reply.message);
+      }
+    });
+
+    return () => {
+      socket.off("list_of_users_response")
+      socket.off("change_authorization_response")
+      socket.off("change_password_response")
+      socket.off("change_username_response")
+      socket.disconnect()
+    }
+  }, []);
 
   useEffect(() => {
     // Run! Like go get some data from an API.
+    console.log('send get list of users')
     socket.emit("get_list_of_users", () => {
       // moving to a difrent page:
     });
   }, []);
 
-  socket.on("change_authorization_response", (reply) => {
-    if (reply.success === "true") {
-      setusermsg1(reply.message);
-    } else {
-      setusermsg1(reply.message);
-    }
-  });
 
-  socket.on("change_password_response", (reply) => {
-    if (reply.success === "true") {
-      setusermsg2(reply.message);
-    } else {
-      setusermsg2(reply.message);
-    }
-  });
 
-  socket.on("change_username_response", (reply) => {
-    if (reply.success === "true") {
-      setusermsg3(reply.message);
-    } else {
-      setusermsg3(reply.message);
-    }
-  });
+
   const onSubmitFunc = (e) => {
     e.preventDefault();
     // if no user name:
