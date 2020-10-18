@@ -248,9 +248,9 @@ const UpdateProgram = () => {
           <Container component="main" maxWidth="xs">
             <CssBaseline />
             <div className={classes.paper}>
-              <Typography component="h1" variant="h5">
+              <h1>
                 UpdateProgram
-              </Typography>
+              </h1>
               <br />
               <form className={classes.form} noValidate>
                 <Autocomplete
@@ -343,9 +343,9 @@ const UpdateProgram = () => {
         <Grid item xs={6}>
           <CssBaseline />
           <div className={classes.paper}>
-            {finishcode && (<div><Typography component="h1" variant="h5">
+            {finishcode && (<div><h1>
               System msg:
-            </Typography>
+            </h1>
               <br/>
               <MsgCard bootloader={bootloader} process={process} loading={loading} mycommand={stateCommandsV}/></div>)}
 

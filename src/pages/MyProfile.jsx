@@ -54,9 +54,9 @@ export default function BasicTable() {
       <NavBar />
       <Container component="main" maxWidth="md">
         <br />
-        <Typography component="h1" variant="h5">
+        <h1>
           My Profile
-        </Typography>
+        </h1>
         <br />
         <TableContainer component={Paper}>
           <Table className={classes.table} aria-label="simple table">

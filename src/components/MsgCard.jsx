@@ -22,7 +22,7 @@ export default function MsgCard(props) {
             <CardContent>
               <div>
                 <h3>command:</h3>
-                <p> {mycommand}</p>
+                <div> {mycommand}</div>
                 <h3>process arguments: </h3>
                 {/* text */}
                 {Object.keys(sampleJSON.object).map((key, i) => (
@@ -34,7 +34,7 @@ export default function MsgCard(props) {
 
                 <h3>bootloader reply:</h3>
                 {/* text */}
-                <p>{bootloader}</p>
+                <div>{bootloader}</div>
               </div>
             </CardContent>
           </Card>

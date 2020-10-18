@@ -47,7 +47,7 @@ function SimpleApp() {
       elevation={0}>
       <AppBar color="primary" position="static" style={{ height: "64px" }}>
         <Toolbar>
-          <Typography color="inherit">Adi and Nevo</Typography>
+          <h1 color="inherit">Netafim-MC</h1>
         </Toolbar>
       </AppBar>
       <Grid container justify="center" style={{ marginTop: "1rem" }}>

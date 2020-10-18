@@ -22,7 +22,6 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 
 import * as io from "socket.io-client";
 var socket;
-socket = io("http://localhost:5000");
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -153,9 +152,9 @@ export default function EditUser() {
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div>
-          <Typography component="h1" variant="h5">
+          <h1>
             Edit User
-          </Typography>
+          </h1>
           <form onSubmit={onSubmitFunc} className={classes.form} noValidate>
             <Grid container spacing={2}>
               <Grid item xs={12}>

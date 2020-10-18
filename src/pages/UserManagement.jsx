@@ -51,7 +51,7 @@ function TabPanel(props) {
       {...other}>
       {value === index && (
         <Box p={3}>
-          <Typography>{children}</Typography>
+          <h1>{children}</h1>
         </Box>
       )}
     </div>
@@ -99,7 +99,7 @@ const UserManagement = () => {
           </Tabs>
         </StyledAppBar>
         <TabPanel value={value} index="one">
-          <Typography component="h1" variant="h5"></Typography>
+          {/*<Typography component="h1" variant="h5"></Typography>*/}
           <NewUser />
         </TabPanel>
         <TabPanel value={value} index="two">

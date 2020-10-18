@@ -120,7 +120,7 @@ export default function Commands(props) {
           <br />{" "}
           <TextField
             variant="outlined"
-            fullWidth
+              fullWidth
             id="list_of_sector_numbers"
             label="list_of_sector_numbers"
             name="list_of_sector_numbers"

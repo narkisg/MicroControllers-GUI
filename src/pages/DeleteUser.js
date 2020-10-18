@@ -15,7 +15,6 @@ import Container from "@material-ui/core/Container";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import * as io from "socket.io-client";
 var socket;
-socket = io("http://localhost:5000");
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -45,25 +44,40 @@ export default function DeleteUser() {
   const [value, setValue] = useState("");
   const [stateUsersList, setstateUsersList] = useState([""]);
 
-  socket.on("list_of_users_response", (reply) => {
-    var list = JSON.parse(reply);
-    setstateUsersList(list);
-  });
+  // socket io:
+  useEffect(() => {
+    socket = io("http://localhost:5000");
+
+    socket.on("list_of_users_response", (reply) => {
+      var list = JSON.parse(reply);
+      setstateUsersList(list);
+    });
+
+    socket.on("delete_user_response", (reply) => {
+      if (reply.success === "true") {
+        // moving to a difrent page:
+        setusermsg(reply.message);
+        // then:
+      } else {
+        setusermsg(reply.message);
+      }
+    });
+    return () => {
+      socket.off("list_of_users_response");
+      socket.off("delete_user_response");
+      socket.disconnect();
+    }
+  }, []);
+
+
   useEffect(() => {
     // Run! Like go get some data from an API.
     socket.emit("get_list_of_users", () => {
       // moving to a difrent page:
     });
   }, []);
-  socket.on("delete_user_response", (reply) => {
-    if (reply.success === "true") {
-      // moving to a difrent page:
-      setusermsg(reply.message);
-      // then:
-    } else {
-      setusermsg(reply.message);
-    }
-  });
+
+
   const onSubmitFunc = (e) => {
     e.preventDefault();
     // alert(value);
@@ -76,9 +90,9 @@ export default function DeleteUser() {
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div>
-          <Typography component="h1" variant="h5">
+          <h1>
             Delete user
-          </Typography>
+          </h1>
           <form onSubmit={onSubmitFunc} className={classes.form} noValidate>
             <Grid container spacing={2}>
               <Grid item xs={12}>

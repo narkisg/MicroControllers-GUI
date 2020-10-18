@@ -6,11 +6,18 @@ import SaveIcon from "@material-ui/icons/Save";
 import { useHistory } from "react-router-dom";
 import * as io from "socket.io-client";
 var socket;
-socket = io("http://localhost:5000");
+
 
 const NavBar = (props) => {
   const [userAuth, setuserAuth] = useState(3);
   const { history } = props;
+
+  // socket io:
+  useEffect(() => {
+    socket = io("http://localhost:5000");
+    return () => socket.disconnect()
+  }, []);
+
   const onLogout = (e) => {
     e.preventDefault();
     socket.emit("logout_attempt");

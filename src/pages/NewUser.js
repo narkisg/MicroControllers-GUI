@@ -14,7 +14,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import * as io from "socket.io-client";
 var socket;
-socket = io("http://localhost:5000");
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -36,16 +35,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-socket.on("login_response", (reply) => {
-  if (reply.success === "true") {
-    // moving to a difrent page:
-    alert(reply.message);
-    // then:
-    // history.push("/");
-  } else {
-    alert(reply.message);
-  }
-});
+
+
+
+
 
 export default function NewUser() {
   const classes = useStyles();
@@ -58,18 +51,39 @@ export default function NewUser() {
   });
   const [usermsg, setusermsg] = useState("");
 
+  // socket io:
+  useEffect(() => {
+    socket = io("http://localhost:5000");
+
+    socket.on("login_response", (reply) => {
+      if (reply.success === "true") {
+        // moving to a difrent page:
+        alert(reply.message);
+        // then:
+        // history.push("/");
+      } else {
+        alert(reply.message);
+      }
+    });
+    socket.on("register_response", (reply) => {
+      if (reply.success === "true") {
+        setusermsg(reply.message);
+      } else {
+
+        setusermsg(reply.message);
+      }
+    });
+
+    return () => {
+      socket.off("login_response")
+      socket.off("register_response")
+      socket.disconnect();
+    }
+  }, []);
+
   const onInputChange = (e) => {
     setState({ ...state, [e.target.name]: e.target.value });
   };
-
-  socket.on("register_response", (reply) => {
-    if (reply.success === "true") {
-      setusermsg(reply.message);
-    } else {
-
-      setusermsg(reply.message);
-    }
-  });
 
   const onSubmitFunc = (e) => {
     e.preventDefault();
@@ -106,9 +120,9 @@ export default function NewUser() {
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div>
-          <Typography component="h1" variant="h5">
+          <h1>
             Create user
-          </Typography>
+          </h1>
           <br />
           <form onSubmit={onSubmitFunc} noValidate>
             <Grid container spacing={2}>

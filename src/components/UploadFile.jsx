@@ -12,8 +12,8 @@ export default function UploadFile(props) {
   return (
     <div>
       <div id="upload-box">
-        <input type="file" onChange={handleUpload} />
-        <p>FilePath: {props.file}</p>
+        <input type="file" onChange={handleUpload} accept=".bin" />
+        <div>FilePath: {props.file}</div>
       </div>
     </div>
   );

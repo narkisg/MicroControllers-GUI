@@ -35,10 +35,10 @@ export default function LoginPage() {
   const history = useHistory();
   const classes = useStyles();
   const [state, setState] = useState({ username: "", password: "" });
+  const [error, setError] = useState('');
 
   // socket io:
   useEffect(() => {
-    console.log('===== we are in login page =====')
     socket = io("http://localhost:5000");
     return () => socket.disconnect()
   }, []);
@@ -52,6 +52,7 @@ export default function LoginPage() {
         history.push("/");
       } else {
         console.log(reply.message);
+        setError(reply.message);
       }
     });
     return () => {
@@ -79,9 +80,9 @@ export default function LoginPage() {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <Typography component="h1" variant="h5">
+        <h1>
           Log in
-        </Typography>
+        </h1>
         <br />
         <img src="/netafim-logo.png" alt="logo" height="70"></img>
 
@@ -126,7 +127,7 @@ export default function LoginPage() {
             Log In
           </Button>
         </form>
-        {/* <h1>{state.username}</h1> */}
+        <p>{error}</p>
       </div>
     </Container>
   );
