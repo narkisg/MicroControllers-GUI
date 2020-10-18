@@ -40,13 +40,19 @@ export default function BasicTable() {
       var object = JSON.parse(reply);
       setstateUsername(object.username);
       setstatePassword(object.password);
-      setstateAuth(object.authorization);
+      if (object.authorization === 1) {
+        setstateAuth("one one");
+      } else if (object.authorization === 2) {
+        setstateAuth("two two");
+      } else if (object.authorization === 3) {
+        setstateAuth("three three");
+      }
     });
     socket.emit("my_profile");
     return () => {
-      socket.off("my_profile_response")
-      socket.disconnect()
-    }
+      socket.off("my_profile_response");
+      socket.disconnect();
+    };
   }, []);
 
   return (
@@ -54,9 +60,7 @@ export default function BasicTable() {
       <NavBar />
       <Container component="main" maxWidth="md">
         <br />
-        <h1>
-          My Profile
-        </h1>
+        <h1>My Profile</h1>
         <br />
         <TableContainer component={Paper}>
           <Table className={classes.table} aria-label="simple table">

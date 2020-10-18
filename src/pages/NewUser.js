@@ -35,11 +35,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
-
-
-
-
 export default function NewUser() {
   const classes = useStyles();
   const [state, setState] = useState({
@@ -69,22 +64,23 @@ export default function NewUser() {
       if (reply.success === "true") {
         setusermsg(reply.message);
       } else {
-
         setusermsg(reply.message);
       }
     });
 
     return () => {
-      socket.off("login_response")
-      socket.off("register_response")
+      socket.off("login_response");
+      socket.off("register_response");
       socket.disconnect();
-    }
+    };
   }, []);
 
   const onInputChange = (e) => {
     setState({ ...state, [e.target.name]: e.target.value });
   };
-
+  const handleChange = (e) => {
+    setState({ ...state, [e.target.name]: e.target.value });
+  };
   const onSubmitFunc = (e) => {
     e.preventDefault();
     const {
@@ -120,9 +116,7 @@ export default function NewUser() {
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div>
-          <h1>
-            Create user
-          </h1>
+          <h1>Create user</h1>
           <br />
           <form onSubmit={onSubmitFunc} noValidate>
             <Grid container spacing={2}>
@@ -166,30 +160,46 @@ export default function NewUser() {
                 />
               </Grid>
               <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  required
+                <FormControl
                   fullWidth
-                  label="Authorization code"
-                  name="authcode"
-                  id="authcode"
-                  onChange={(e) => onInputChange(e)}
-                  value={state.authcode}
-                />
+                  variant="outlined"
+                  className={classes.formControl}>
+                  <InputLabel id="authcode-1">
+                    new user authorization
+                  </InputLabel>
+                  <Select
+                    labelId="authcode"
+                    id="authcode"
+                    value={state.authcode}
+                    onChange={handleChange}
+                    label="new user
+                    authorization">
+                    <MenuItem value={1}>simple user</MenuItem>
+                    <MenuItem value={2}>developer</MenuItem>
+                    <MenuItem value={3}>administrator</MenuItem>
+                  </Select>
+                </FormControl>
               </Grid>
               <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  required
+                <FormControl
                   fullWidth
-                  label="Confirm Authorization code"
-                  name="authcodeConfirm"
-                  id="authcodeConfirm"
-                  onChange={(e) => onInputChange(e)}
-                  value={state.authcodeConfirm}
-                />
-
-
+                  variant="outlined"
+                  className={classes.formControl}>
+                  <InputLabel id="demo-simple-select-outlined-label">
+                    new user authorization
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-outlined-label"
+                    id="Authorization code"
+                    value={state.authcodeConfirm}
+                    onChange={handleChange}
+                    label="new user
+                    authorization">
+                    <MenuItem value={1}>simple user</MenuItem>
+                    <MenuItem value={2}>developer</MenuItem>
+                    <MenuItem value={3}>administrator</MenuItem>
+                  </Select>
+                </FormControl>
               </Grid>
             </Grid>
             <h5>{usermsg}</h5>

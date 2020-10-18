@@ -5,14 +5,13 @@ import * as io from "socket.io-client";
 import UploadFile from "./UploadFile";
 var socket;
 
-
 export default function Commands(props) {
   const [fields, setFields] = useState([""]);
   const inputtext = props.currentcom;
 
   useEffect(() => {
     socket = io("http://localhost:5000");
-    return () => socket.disconnect()
+    return () => socket.disconnect();
   }, []);
 
   useEffect(() => {
@@ -34,7 +33,7 @@ export default function Commands(props) {
         alert("error");
       }
     });
-    return () => socket.off("get_fields_response")
+    return () => socket.off("get_fields_response");
   }, []);
 
   useEffect(() => {
@@ -120,11 +119,17 @@ export default function Commands(props) {
           <br />{" "}
           <TextField
             variant="outlined"
-              fullWidth
+            fullWidth
             id="list_of_sector_numbers"
             label="list_of_sector_numbers"
             name="list_of_sector_numbers"
             onChange={(e) => props.setisListOfSector(e.target.value)}
+            InputProps={{
+              inputProps: {
+                max: 7,
+                min: 7,
+              },
+            }}
           />
           <br />
         </div>
@@ -134,16 +139,16 @@ export default function Commands(props) {
         <div>
           <br />{" "}
           <Autocomplete
-              value={props.isMode}
-              fullWidth
-              onChange={(event, newValue) => {
-                props.setisMode(newValue);
-              }}
-              id="mode"
-              options={["1","0"]}
-              renderInput={(params) => (
-                  <TextField {...params} label="mode" variant="outlined" />
-              )}
+            value={props.isMode}
+            fullWidth
+            onChange={(event, newValue) => {
+              props.setisMode(newValue);
+            }}
+            id="mode"
+            options={["1", "0"]}
+            renderInput={(params) => (
+              <TextField {...params} label="mode" variant="outlined" />
+            )}
           />
           <br />
         </div>
