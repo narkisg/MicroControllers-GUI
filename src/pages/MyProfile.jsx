@@ -40,12 +40,12 @@ export default function BasicTable() {
       var object = JSON.parse(reply);
       setstateUsername(object.username);
       setstatePassword(object.password);
-      if (object.authorization === 1) {
-        setstateAuth("one one");
-      } else if (object.authorization === 2) {
-        setstateAuth("two two");
-      } else if (object.authorization === 3) {
-        setstateAuth("three three");
+      if (object.authorization === "1") {
+        setstateAuth("simple user");
+      } else if (object.authorization === "2") {
+        setstateAuth("developer");
+      } else if (object.authorization === "3") {
+        setstateAuth("administrator");
       }
     });
     socket.emit("my_profile");

@@ -15,7 +15,6 @@ import { Card, CardContent, TextField } from "@material-ui/core";
 import MsgCard from "../components/MsgCard";
 var socket;
 
-
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -56,11 +55,12 @@ const UpdateProgram = () => {
   const [bootloader, setbootloader] = useState([""]);
   const [loading, setloading] = useState(false);
   const [finishcode, setfinishcode] = useState(false);
+  const [portmsg, setportmsg] = useState("");
 
   // socket io:
   useEffect(() => {
     socket = io("http://localhost:5000");
-    return () => socket.disconnect()
+    return () => socket.disconnect();
   }, []);
 
   // prosess:
@@ -68,17 +68,17 @@ const UpdateProgram = () => {
     socket.on("execute_command_bootloader_response", (reply) => {
       if (reply) {
         // alert("execute_command_bootloader_response")
-        setfinishcode(true)
-        setloading(false)
+        setfinishcode(true);
+        setloading(false);
         setbootloader(reply.message);
       } else {
         // alert("execute_command_bootloader_response")
-        setfinishcode(true)
-        setloading(false)
+        setfinishcode(true);
+        setloading(false);
         setbootloader(reply.message);
       }
     });
-    return () => socket.off("execute_command_bootloader_response")
+    return () => socket.off("execute_command_bootloader_response");
   }, []);
 
   // bootloader:
@@ -86,17 +86,30 @@ const UpdateProgram = () => {
     socket.on("execute_command_process_response", (reply) => {
       if (reply) {
         // alert("eexecute_command_process_response")
-        setfinishcode(true)
-        setloading(false)
+        setfinishcode(true);
+        setloading(false);
         setprocess(reply);
       } else {
         // alert("eexecute_command_process_response")
-        setfinishcode(true)
-        setloading(false)
+        setfinishcode(true);
+        setloading(false);
         setprocess(reply);
       }
     });
-    return () => socket.off("execute_command_process_response")
+    return () => socket.off("execute_command_process_response");
+  }, []);
+
+  // portmsg:
+  useEffect(() => {
+    socket.on("port_configuration_response_response", (reply) => {
+      if (reply) {
+        setportmsg(reply);
+      } else {
+        // alert("eexecute_command_process_response")
+        setportmsg(reply);
+      }
+    });
+    return () => socket.off("port_configuration_response_response");
   }, []);
 
   // other:
@@ -111,20 +124,19 @@ const UpdateProgram = () => {
         setusermsg("error");
       }
     });
-    return () => socket.off("list_of_commands_response")
+    return () => socket.off("list_of_commands_response");
   }, []);
 
   useEffect(() => {
     socket.on("list_of_controllers_response", (reply) => {
       if (reply) {
-
         const map1 = JSON.parse(reply);
         setstateControllers(map1);
       } else {
         setusermsg("error");
       }
     });
-    return () => socket.off("list_of_controllers_response")
+    return () => socket.off("list_of_controllers_response");
   }, []);
   useEffect(() => {
     socket.on("list_of_ports_response", (reply) => {
@@ -135,7 +147,7 @@ const UpdateProgram = () => {
         setusermsg("error");
       }
     });
-    return () => socket.off("list_of_ports_response")
+    return () => socket.off("list_of_ports_response");
   }, []);
   useEffect(() => {
     socket.on("execute_command_response", (reply) => {
@@ -143,11 +155,10 @@ const UpdateProgram = () => {
         // alert("execute_command_response")
         setusermsg(reply.message);
       } else {
-
         setusermsg(reply.message);
       }
     });
-    return () => socket.off("execute_command_response")
+    return () => socket.off("execute_command_response");
   }, []);
 
   useEffect(() => {
@@ -166,19 +177,20 @@ const UpdateProgram = () => {
     if (!stateCommandsPortsV || !stateControllersV || !stateCommandsV) {
       setusermsg("empty field");
     } else {
-      setfinishcode(true)
+      setfinishcode(true);
       if (stateCommandsV === "BL_GO_TO_ADDR") {
-          setloading(true)
-          socket.emit("execute_command", {
-            port_name: stateCommandsPortsV,
-            controller_name: stateControllersV,
-            command_name: stateCommandsV,
-            additional_parameters: { address: '0' }})
+        setloading(true);
+        socket.emit("execute_command", {
+          port_name: stateCommandsPortsV,
+          controller_name: stateControllersV,
+          command_name: stateCommandsV,
+          additional_parameters: { address: "0" },
+        });
       } else if (stateCommandsV === "BL_FLASH_ERASE") {
         if (!isSectorsNumbers || !isNumberOfSectors) {
           setusermsg("empty field");
         } else {
-          setloading(true)
+          setloading(true);
           socket.emit("execute_command", {
             port_name: stateCommandsPortsV,
             controller_name: stateControllersV,
@@ -193,22 +205,24 @@ const UpdateProgram = () => {
         if (!isFileName) {
           setusermsg("empty field");
         } else {
-          setloading(true)
+          setloading(true);
           socket.emit("execute_command", {
             port_name: stateCommandsPortsV,
             controller_name: stateControllersV,
             command_name: stateCommandsV,
             additional_parameters: {
               file_name: isFileName,
-              address: '0',
+              address: "0",
             },
           });
         }
       } else if (stateCommandsV === "BL_EN_R_W_PROTECT") {
         if (!isTotalSector || !isListOfSector || !isMode) {
           setusermsg("empty field");
-        } else if (isListOfSector.length > parseInt(isTotalSector)){setusermsg("list length supposed to be as total sector  ")}else {
-          setloading(true)
+        } else if (isListOfSector.length > parseInt(isTotalSector)) {
+          setusermsg("list length supposed to be as total sector  ");
+        } else {
+          setloading(true);
           socket.emit("execute_command", {
             port_name: stateCommandsPortsV,
             controller_name: stateControllersV,
@@ -224,7 +238,7 @@ const UpdateProgram = () => {
         if (!stateCommandsPorts || !stateControllers || !stateCommandsV) {
           setusermsg("empty field");
         } else {
-          setloading(true)
+          setloading(true);
           socket.emit("execute_command", {
             port_name: stateCommandsPortsV,
             // port_name: "COM3",
@@ -238,7 +252,7 @@ const UpdateProgram = () => {
   };
   function refreshPage() {
     window.location.reload(false);
-    socket.emit("reset_ports")
+    socket.emit("reset_ports");
   }
   return (
     <div>
@@ -248,9 +262,7 @@ const UpdateProgram = () => {
           <Container component="main" maxWidth="xs">
             <CssBaseline />
             <div className={classes.paper}>
-              <h1>
-                UpdateProgram
-              </h1>
+              <h1>UpdateProgram</h1>
               <br />
               <form className={classes.form} noValidate>
                 <Autocomplete
@@ -319,23 +331,26 @@ const UpdateProgram = () => {
                   isSectorsNumbers={isSectorsNumbers}
                 />
                 <h5>{usermsg}</h5>
-                {!finishcode &&(<Button
+                {!finishcode && (
+                  <Button
                     onClick={onSubmitFunc}
                     type="submit"
                     variant="contained"
                     color="primary"
                     fullWidth
                     className={classes.submit}>
-                  submit
-                </Button>)}
-                {finishcode &&(<Button
+                    submit
+                  </Button>
+                )}
+                {finishcode && (
+                  <Button
                     onClick={refreshPage}
                     variant="contained"
                     color="primary"
-                    fullWidth
-                    >
-                  reset for another command
-                </Button>)}
+                    fullWidth>
+                    reset for another command
+                  </Button>
+                )}
               </form>
             </div>
           </Container>
@@ -343,12 +358,19 @@ const UpdateProgram = () => {
         <Grid item xs={6}>
           <CssBaseline />
           <div className={classes.paper}>
-            {finishcode && (<div><h1>
-              System msg:
-            </h1>
-              <br/>
-              <MsgCard bootloader={bootloader} process={process} loading={loading} mycommand={stateCommandsV}/></div>)}
-
+            {finishcode && (
+              <div>
+                <h1>System msg:</h1>
+                <br />
+                <MsgCard
+                  bootloader={bootloader}
+                  process={process}
+                  loading={loading}
+                  mycommand={stateCommandsV}
+                  portmsgprop={portmsg}
+                />
+              </div>
+            )}
           </div>
         </Grid>
       </Grid>
