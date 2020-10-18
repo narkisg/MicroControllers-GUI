@@ -43,9 +43,8 @@ export default function NewUser() {
     username: "",
     password: "",
     passwordConfirm: "",
-    authcode: "",
-    authcodeConfirm: "",
   });
+  const [authcode, setauthcode] = useState("");
   const [usermsg, setusermsg] = useState("");
 
   // socket io:
@@ -80,29 +79,15 @@ export default function NewUser() {
   const onInputChange = (e) => {
     setState({ ...state, [e.target.name]: e.target.value });
   };
-  const handleChange = (e) => {
-    setState({ ...state, [e.target.name]: e.target.value });
+  const handleChange = (event) => {
+    setauthcode(event.target.value);
   };
   const onSubmitFunc = (e) => {
     e.preventDefault();
-    const {
-      username,
-      password,
-      passwordConfirm,
-      authcode,
-      authcodeConfirm,
-    } = state;
+    const { username, password, passwordConfirm } = state;
     if (password != passwordConfirm) {
       setusermsg("password error");
-    } else if (authcode != authcodeConfirm) {
-      setusermsg("auth error");
-    } else if (
-      !username ||
-      !password ||
-      !passwordConfirm ||
-      !authcode ||
-      !authcodeConfirm
-    ) {
+    } else if (!username || !password || !passwordConfirm || !authcode) {
       setusermsg("missing field");
     } else {
       socket.emit("register_user", {
@@ -162,41 +147,21 @@ export default function NewUser() {
                 />
               </Grid>
               <Grid item xs={12}>
-                <FormControl
-                  fullWidth
-                  variant="outlined"
-                  className={classes.formControl}>
-                  <InputLabel id="authcode-1">
-                    new user authorization
-                  </InputLabel>
-                  <Select
-                    labelId="authcode"
-                    id="authcode"
-                    value={state.authcode}
-                    onChange={handleChange}
-                    label="new user
-                    authorization">
-                    <MenuItem value={1}>simple user</MenuItem>
-                    <MenuItem value={2}>developer</MenuItem>
-                    <MenuItem value={3}>administrator</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
-              <Grid item xs={12}>
+                {" "}
                 <FormControl
                   fullWidth
                   variant="outlined"
                   className={classes.formControl}>
                   <InputLabel id="demo-simple-select-outlined-label">
-                    new user authorization
+                    new user authorization (optional)
                   </InputLabel>
                   <Select
                     labelId="demo-simple-select-outlined-label"
-                    id="Authorization code"
-                    value={state.authcodeConfirm}
+                    id="demo-simple-select-outlined"
+                    value={authcode}
                     onChange={handleChange}
                     label="new user
-                    authorization">
+                    authorization (optional)">
                     <MenuItem value={1}>simple user</MenuItem>
                     <MenuItem value={2}>developer</MenuItem>
                     <MenuItem value={3}>administrator</MenuItem>

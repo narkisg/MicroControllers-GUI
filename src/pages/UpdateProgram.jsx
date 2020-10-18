@@ -99,18 +99,18 @@ const UpdateProgram = () => {
     return () => socket.off("execute_command_process_response");
   }, []);
 
-  // portmsg:
-  useEffect(() => {
-    socket.on("port_configuration_response_response", (reply) => {
-      if (reply) {
-        setportmsg(reply);
-      } else {
-        // alert("eexecute_command_process_response")
-        setportmsg(reply);
-      }
-    });
-    return () => socket.off("port_configuration_response_response");
-  }, []);
+  // // portmsg:
+  // useEffect(() => {
+  //   socket.on("port_configuration_response_response", (reply) => {
+  //     if (reply) {
+  //       setportmsg(reply);
+  //     } else {
+  //       // alert("eexecute_command_process_response")
+  //       setportmsg(reply);
+  //     }
+  //   });
+  //   return () => socket.off("port_configuration_response_response");
+  // }, []);
 
   // other:
   useEffect(() => {
@@ -355,7 +355,7 @@ const UpdateProgram = () => {
             </div>
           </Container>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={5}>
           <CssBaseline />
           <div className={classes.paper}>
             {finishcode && (
@@ -367,7 +367,6 @@ const UpdateProgram = () => {
                   process={process}
                   loading={loading}
                   mycommand={stateCommandsV}
-                  portmsgprop={portmsg}
                 />
               </div>
             )}

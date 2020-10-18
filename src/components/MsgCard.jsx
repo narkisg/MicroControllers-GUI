@@ -23,7 +23,7 @@ export default function MsgCard(props) {
               <div>
                 <h3>command:</h3>
                 <div> {mycommand}</div>
-                <p>{portmsgprop}</p>
+                {/* <p>{portmsgprop}</p> */}
                 <h3>process arguments: </h3>
                 {/* text */}
                 {Object.keys(sampleJSON.object).map((key, i) => (
