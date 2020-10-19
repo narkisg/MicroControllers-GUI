@@ -101,14 +101,14 @@ const UpdateProgram = () => {
 
   // portmsg:
   useEffect(() => {
-    socket.on("port_configuration_response_response", (reply) => {
+    socket.on("port_configuration_response", (reply) => {
       if (reply.success === "true") {
-        alert(reply.message);
+        setportmsg(reply.message);
       } else {
-        alert(reply.message);
+        setportmsg(reply.message);
       }
     });
-    return () => socket.off("port_configuration_response_response");
+    return () => socket.off("port_configuration_response");
   }, []);
 
   // other:
@@ -366,6 +366,7 @@ const UpdateProgram = () => {
                   process={process}
                   loading={loading}
                   mycommand={stateCommandsV}
+                  portmsg={portmsg}
                 />
               </div>
             )}
