@@ -102,7 +102,7 @@ const UpdateProgram = () => {
   // portmsg:
   useEffect(() => {
     socket.on("port_configuration_response", (reply) => {
-      if (reply.success === "true") {
+      if (reply) {
         setportmsg(reply.message);
       } else {
         setportmsg(reply.message);
@@ -360,13 +360,13 @@ const UpdateProgram = () => {
             {finishcode && (
               <div>
                 <h1>System msg:</h1>
+                <p>{portmsg}</p>
                 <br />
                 <MsgCard
                   bootloader={bootloader}
                   process={process}
                   loading={loading}
                   mycommand={stateCommandsV}
-                  portmsg={portmsg}
                 />
               </div>
             )}
