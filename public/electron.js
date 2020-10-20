@@ -25,6 +25,10 @@ function createWindow() {
    mainWindow = null;
   });
 
+    child = execFile( path.join(__dirname, 'py-server.exe'), (data, err) => {
+        console.log(err);
+    });
+
 }
 
 app.on("ready", createWindow);
@@ -40,6 +44,4 @@ app.on("activate", () => {
   }
 });
 
-child = execFile( path.join(__dirname, 'py-server.exe'), (data, err) => {
-  console.log(err);
-});
+

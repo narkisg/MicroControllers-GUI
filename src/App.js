@@ -10,25 +10,15 @@ import Theme from "./Theme";
 import { makeStyles } from "@material-ui/core/styles";
 import { useHistory } from "react-router-dom";
 import * as io from "socket.io-client";
+import Splash from "./pages/splash";
 var socket;
 
 
 export default function App() {
   const history = useHistory();
-  useEffect(() => {
-    socket = io("http://localhost:5000");
-   return () => {socket.disconnect()}
-  }, []);
 
-  useEffect(() => {
-    socket.on("is_connected_response", (reply) => {
-      if (reply.success === "false") {
-        history.push("/SignInPage");
-      }
-    });
-    socket.emit("is_connected");
-    return (()=> socket.off("is_connected_response"))
-  }, []);
+  history.push("/Splash");
+
   return (
     <Theme>
       <div>
@@ -38,6 +28,11 @@ export default function App() {
               exact
               from="/"
               render={(props) => <UpdateProgram {...props} />}
+            />
+            <Route
+                exact
+                from="/Splash"
+                render={(props) => <Splash {...props} />}
             />
 
             <Route
