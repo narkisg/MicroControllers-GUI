@@ -84,7 +84,7 @@ export default function LoginPage() {
           Log in
         </h1>
         <br />
-        <img src="/netafim-logo.png" alt="logo" height="70"></img>
+        <img src="netafim-logo.png" alt="logo" height="70"></img>
 
         <form onSubmit={onSubmitFunc} className={classes.form} noValidate>
           <TextField

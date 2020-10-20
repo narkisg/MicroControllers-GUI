@@ -1,8 +1,8 @@
 version: 0.1.0
 files:
-  - url: adi-nevo-ziv-Setup-0.1.0.exe
-    sha512: srCAfxH6C/nGaxNwt1/uuqAF83O8H8mhJVmJVxufeJvEB86LOQgtoDDZMREBbNfjVFIZbas/2TkrYR2rQHt6Dw==
-    size: 71848409
-path: adi-nevo-ziv-Setup-0.1.0.exe
-sha512: srCAfxH6C/nGaxNwt1/uuqAF83O8H8mhJVmJVxufeJvEB86LOQgtoDDZMREBbNfjVFIZbas/2TkrYR2rQHt6Dw==
-releaseDate: '2020-10-05T18:10:46.542Z'
+  - url: netafim-mc-Setup-0.1.0.exe
+    sha512: xrxC5tNAsB5+W5/kOGZuqbfYjYYF+eqtyzQe9oKGn69TCFhZSgi4J9XP12K0wPIrpBuaVuv1FJduay3s+KlmEA==
+    size: 109307828
+path: netafim-mc-Setup-0.1.0.exe
+sha512: xrxC5tNAsB5+W5/kOGZuqbfYjYYF+eqtyzQe9oKGn69TCFhZSgi4J9XP12K0wPIrpBuaVuv1FJduay3s+KlmEA==
+releaseDate: '2020-10-20T16:34:33.319Z'

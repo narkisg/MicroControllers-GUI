@@ -52,7 +52,7 @@ const NavBar = (props) => {
 
   return (
     <Box display="flex" bgcolor="grey.200" p={2} alignItems="center">
-      <img src="/netafim-logo.png" alt="logo" height="40"></img>
+      <img src="netafim-logo.png" alt="logo" height="40"></img>
       <Box>
         {itemsList
           .filter((user) => user.auth.includes(userAuth))

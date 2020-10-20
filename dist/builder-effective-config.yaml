@@ -14,5 +14,6 @@ extraFiles:
     to: ''
     filter:
       - py-server.exe
+      - database.json
 extends: react-cra
-electronVersion: 10.1.2
+electronVersion: 10.1.3

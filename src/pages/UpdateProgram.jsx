@@ -13,6 +13,7 @@ import Commands from "../components/Commands";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { Card, CardContent, TextField } from "@material-ui/core";
 import MsgCard from "../components/MsgCard";
+
 var socket;
 
 const useStyles = makeStyles((theme) => ({
@@ -250,8 +251,33 @@ const UpdateProgram = () => {
     }
   };
   function refreshPage() {
-    window.location.reload(false);
+    // window.location.reload(false);
+    setusermsg('')
+
+    setstateCommands([""])
+    setstateControllers([""])
+    setstateCommandsPorts([""])
+   setstateCommandsV('')
+   setstateControllersV('')
+    setstateCommandsPortsV('')
+
+    setisSectorsNumbers('')
+    setisNumberOfSectors('')
+    setisFileName('')
+    setisTotalSector('')
+    setisListOfSector('')
+    setisMode('')
+     setlistofNumbers2([""])
+     setprocess([""])
+    setbootloader([""])
+    setloading(false)
+    setfinishcode(false)
+    setportmsg('')
     socket.emit("reset_ports");
+    socket.emit("get_list_of_commands", () => {});
+    socket.emit("get_list_of_controllers", () => {});
+    socket.emit("get_list_of_ports", () => {});
+
   }
   return (
     <div>
