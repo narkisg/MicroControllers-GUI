@@ -13,7 +13,10 @@ extraFiles:
   - from: public
     to: ''
     filter:
-      - py-server.exe
       - database.json
+  - from: public
+    to: ''
+    filter:
+      - '**/*'
 extends: react-cra
 electronVersion: 10.1.3

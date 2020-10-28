@@ -1,4 +1,4 @@
-const execFile = require('child_process').execFile;
+const { spawn } = require('child_process');
 const path = require("path");
 var killtree = require('tree-kill');
 
@@ -9,6 +9,7 @@ const BrowserWindow = electron.BrowserWindow;
 
 const url = require("url");
 const isDev = require("electron-is-dev");
+const { kill } = require('process');
 
 let mainWindow
 let child
@@ -24,17 +25,21 @@ function createWindow() {
   mainWindow.on("closed", () => {
    mainWindow = null;
   });
-
-    child = execFile( path.join(__dirname, 'py-server.exe'), (data, err) => {
+    child = spawn('py-server.exe', null, {}, (data, err) => {
         console.log(err);
     });
+    console.log(child.pid)
 
 }
 
 app.on("ready", createWindow);
+ app.on("will-quit", () => {
+  console.log(child.pid)
 
+    killtree(child.pid);
+});
 app.on("window-all-closed", async () => {
-    killtree(child.pid, 'SIGKILL');
+
     app.quit()
 });
 
