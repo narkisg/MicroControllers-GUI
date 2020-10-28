@@ -151,6 +151,8 @@ const UpdateProgram = () => {
   }, []);
   useEffect(() => {
     socket.on("execute_command_response", (reply) => {
+      // console.log('returned hereeeeeee')
+      setloading(false);
       if (reply.success === "true") {
         // alert("execute_command_response")
         setusermsg(reply.message);
@@ -250,6 +252,7 @@ const UpdateProgram = () => {
       }
     }
   };
+
   function refreshPage() {
     // window.location.reload(false);
     setusermsg('')
@@ -257,8 +260,8 @@ const UpdateProgram = () => {
     setstateCommands([""])
     setstateControllers([""])
     setstateCommandsPorts([""])
-   setstateCommandsV('')
-   setstateControllersV('')
+    setstateCommandsV('')
+    setstateControllersV('')
     setstateCommandsPortsV('')
 
     setisSectorsNumbers('')
@@ -267,16 +270,19 @@ const UpdateProgram = () => {
     setisTotalSector('')
     setisListOfSector('')
     setisMode('')
-     setlistofNumbers2([""])
-     setprocess([""])
+    setlistofNumbers2([""])
+    setprocess([""])
     setbootloader([""])
     setloading(false)
     setfinishcode(false)
     setportmsg('')
     socket.emit("reset_ports");
-    socket.emit("get_list_of_commands", () => {});
-    socket.emit("get_list_of_controllers", () => {});
-    socket.emit("get_list_of_ports", () => {});
+    socket.emit("get_list_of_commands", () => {
+    });
+    socket.emit("get_list_of_controllers", () => {
+    });
+    socket.emit("get_list_of_ports", () => {
+    });
 
   }
   return (
@@ -356,7 +362,8 @@ const UpdateProgram = () => {
                   isSectorsNumbers={isSectorsNumbers}
                 />
                 <h5>{usermsg}</h5>
-                {!finishcode && (
+                {/*{!finishcode && (*/}
+                {(
                   <Button
                     onClick={onSubmitFunc}
                     type="submit"
@@ -364,7 +371,7 @@ const UpdateProgram = () => {
                     color="primary"
                     fullWidth
                     className={classes.submit}>
-                    submit
+                    Execute
                   </Button>
                 )}
                 {finishcode && (
@@ -373,7 +380,7 @@ const UpdateProgram = () => {
                     variant="contained"
                     color="primary"
                     fullWidth>
-                    reset for another command
+                    Reset port
                   </Button>
                 )}
               </form>
