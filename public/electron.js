@@ -1,13 +1,11 @@
 const {spawn} = require('child_process');
 const path = require("path");
-var killtree = require('tree-kill');
+const killtree = require('tree-kill');
 
 const electron = require("electron");
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 
-
-const url = require("url");
 const isDev = require("electron-is-dev");
 
 let mainWindow
@@ -28,7 +26,6 @@ function createWindow() {
         console.log(err);
     });
     console.log(child.pid)
-
 }
 
 app.on("ready", createWindow);
