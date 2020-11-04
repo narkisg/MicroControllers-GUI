@@ -204,6 +204,9 @@ const UpdateProgram = () => {
           });
         }
       } else if (stateCommandsV === "BL_MEM_WRITE") {
+        // open dialog with title = "are you sure you want to..."
+        // if no - return
+
         if (!isFileName) {
           setusermsg("empty field");
         } else {
@@ -293,7 +296,7 @@ const UpdateProgram = () => {
           <Container component="main" maxWidth="xs">
             <CssBaseline />
             <div className={classes.paper}>
-              <h1>UpdateProgram</h1>
+              <h1>Update Program</h1>
               <br />
               <form className={classes.form} noValidate>
                 <Autocomplete
@@ -392,7 +395,7 @@ const UpdateProgram = () => {
           <div className={classes.paper}>
             {finishcode && (
               <div>
-                <h1>System msg:</h1>
+                <h2>System msg:</h2>
                 <p>{portmsg}</p>
                 <br />
                 <MsgCard

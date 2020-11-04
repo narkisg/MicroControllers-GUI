@@ -12,3 +12,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+h1 {
+  color: #495464; font-size: 48px; font-family: 'Signika', sans-serif; padding-bottom: 10px;
+}
+
+h2 {
+  color: #394867; font-family: 'Signika', sans-serif; font-size: 24px; font-weight: 300; line-height: 40px; margin: 0 0 16px;
+}

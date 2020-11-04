@@ -63,7 +63,8 @@
         "filter": [
           "database.json"
         ]
-      },{
+      },
+      {
         "from": "public",
         "to": "",
         "filter": [
