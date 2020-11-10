@@ -1,22 +1,21 @@
 import React, { useState, useEffect } from "react";
-import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import * as io from "socket.io-client";
-var socket;
+import Dialog from "@material-ui/core/Dialog";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogActions from "@material-ui/core/DialogActions";
 
+var socket;
 const useStyles = makeStyles((theme) => ({
+
   paper: {
     marginTop: theme.spacing(8),
     display: "flex",
@@ -35,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
   },
 }));
-const optionsController = ["adi strauss", "nevo strauss"];
+
 
 export default function DeleteUser() {
   const classes = useStyles();
@@ -43,6 +42,7 @@ export default function DeleteUser() {
 
   const [value, setValue] = useState("");
   const [stateUsersList, setstateUsersList] = useState([""]);
+  const [open, setOpen] = React.useState(false);
 
   // socket io:
   useEffect(() => {
@@ -85,6 +85,22 @@ export default function DeleteUser() {
       username_to_delete: value,
     });
   };
+
+
+  const handleClickOpen = (e) => {
+    e.preventDefault();
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleProceed = (e) => {
+    onSubmitFunc(e)
+    setOpen(false);
+  }
+
   return (
     <div>
       <Container component="main" maxWidth="xs">
@@ -93,7 +109,7 @@ export default function DeleteUser() {
           <h1>
             Delete user
           </h1>
-          <form onSubmit={onSubmitFunc} className={classes.form} noValidate>
+          <form onSubmit={handleClickOpen} className={classes.form} noValidate>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <Autocomplete
@@ -126,6 +142,26 @@ export default function DeleteUser() {
           </form>
         </div>
       </Container>
+      <div>
+        <Dialog
+            open={open}
+            onClose={handleClose}>
+          <DialogTitle id="alert-dialog-title">{"Delete user alert"}</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              are you sure you want to delete this user?
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose} color="primary">
+              Cancel
+            </Button>
+            <Button onClick={handleProceed} color="primary" autoFocus>
+              Delete anyway
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </div>
     </div>
   );
 }

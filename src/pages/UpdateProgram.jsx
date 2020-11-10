@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Auto from "../components/Auto";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
-import Typography from "@material-ui/core/Typography";
 import NavBar from "../components/NavBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { makeStyles } from "@material-ui/core/styles";
@@ -13,6 +10,11 @@ import Commands from "../components/Commands";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { Card, CardContent, TextField } from "@material-ui/core";
 import MsgCard from "../components/MsgCard";
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 var socket;
 
@@ -32,7 +34,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const ensureCommands = ['BL_FLASH_MASS_ERASE','BL_FLASH_ERASE','BL_MEM_WRITE',
+                            'BL_EN_R_W_PROTECT','BL_MEM_READ','BL_READ_SECTOR_P_STATUS',
+                            'BL_OTP_READ','BL_DIS_R_W_PROTECT', 'BL_MY_NEW_COMMAND']
+
 const UpdateProgram = () => {
+  const [open, setOpen] = React.useState(false);
+
   const classes = useStyles();
   const [usermsg, setusermsg] = useState("");
 
@@ -256,6 +264,28 @@ const UpdateProgram = () => {
     }
   };
 
+  function areYouSure(e){
+    if(ensureCommands.includes(stateCommandsV)){
+      handleClickOpen(e)
+    }
+    else {
+      onSubmitFunc(e)
+    }
+  }
+  const handleClickOpen = (e) => {
+    e.preventDefault();
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleProceed = (e) => {
+    onSubmitFunc(e)
+    setOpen(false);
+  }
+
   function refreshPage() {
     // window.location.reload(false);
     setusermsg('')
@@ -368,7 +398,7 @@ const UpdateProgram = () => {
                 {/*{!finishcode && (*/}
                 {(
                   <Button
-                    onClick={onSubmitFunc}
+                    onClick={areYouSure}
                     type="submit"
                     variant="contained"
                     color="primary"
@@ -409,6 +439,26 @@ const UpdateProgram = () => {
           </div>
         </Grid>
       </Grid>
+      <div>
+        <Dialog
+            open={open}
+            onClose={handleClose}>
+          <DialogTitle id="alert-dialog-title">{"Writing commands alert"}</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              This command might override data on the controller, are you sure you want to proceed?
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose} color="primary">
+              Cancel
+            </Button>
+            <Button onClick={handleProceed} color="primary" autoFocus>
+              Proceed
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </div>
     </div>
   );
 };
