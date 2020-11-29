@@ -76,12 +76,10 @@ const UpdateProgram = () => {
   useEffect(() => {
     socket.on("execute_command_bootloader_response", (reply) => {
       if (reply) {
-        // alert("execute_command_bootloader_response")
         setfinishcode(true);
         setloading(false);
         setbootloader(reply.message);
       } else {
-        // alert("execute_command_bootloader_response")
         setfinishcode(true);
         setloading(false);
         setbootloader(reply.message);
@@ -94,12 +92,10 @@ const UpdateProgram = () => {
   useEffect(() => {
     socket.on("execute_command_process_response", (reply) => {
       if (reply) {
-        // alert("eexecute_command_process_response")
         setfinishcode(true);
         setloading(false);
         setprocess(reply);
       } else {
-        // alert("eexecute_command_process_response")
         setfinishcode(true);
         setloading(false);
         setprocess(reply);
@@ -159,10 +155,8 @@ const UpdateProgram = () => {
   }, []);
   useEffect(() => {
     socket.on("execute_command_response", (reply) => {
-      // console.log('returned hereeeeeee')
       setloading(false);
       if (reply.success === "true") {
-        // alert("execute_command_response")
         setusermsg(reply.message);
       } else {
         setusermsg(reply.message);
@@ -182,6 +176,7 @@ const UpdateProgram = () => {
   }, []);
   const onSubmitFunc = (e) => {
     e.preventDefault();
+
     // if there is empty fields:
 
     if (!stateCommandsPortsV || !stateControllersV || !stateCommandsV) {
