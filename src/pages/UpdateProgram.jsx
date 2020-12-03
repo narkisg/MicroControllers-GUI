@@ -72,7 +72,7 @@ const UpdateProgram = () => {
     return () => socket.disconnect();
   }, []);
 
-  // prosess:
+  // process:
   useEffect(() => {
     socket.on("execute_command_bootloader_response", (reply) => {
       if (reply) {
