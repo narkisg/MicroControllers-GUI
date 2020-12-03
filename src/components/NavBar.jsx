@@ -1,9 +1,8 @@
+// eslint-disable-next-line no-unused-vars
 import { Box, Typography, Button, IconButton } from "@material-ui/core";
-import MenuIcon from "@material-ui/icons/Menu";
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import SaveIcon from "@material-ui/icons/Save";
-import { useHistory } from "react-router-dom";
 import * as io from "socket.io-client";
 var socket;
 
@@ -48,11 +47,16 @@ const NavBar = (props) => {
       auth: [1, 2, 3],
       onClick: () => history.push("/MyProfile"),
     },
+    {
+      text: "Settings",
+      auth: [1, 2, 3],
+      onClick: () => history.push("/Settings"),
+    },
   ];
 
   return (
     <Box display="flex" bgcolor="grey.200" p={2} alignItems="center">
-      <img src="netafim-logo.png" alt="logo" height="40"></img>
+      <img src="netafim-logo.png" alt="logo" height="40"/>
       <Box>
         {itemsList
           .filter((user) => user.auth.includes(userAuth))

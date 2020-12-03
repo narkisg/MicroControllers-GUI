@@ -5,11 +5,8 @@ import SignInPage from "./pages/SignInPage";
 import UserManagement from "./pages/UserManagement";
 import MyProfile from "./pages/MyProfile";
 import { Route, Switch } from "react-router-dom";
-import styled from "styled-components";
 import Theme from "./Theme";
-import { makeStyles } from "@material-ui/core/styles";
 import { useHistory } from "react-router-dom";
-import * as io from "socket.io-client";
 import Splash from "./pages/splash";
 var socket;
 

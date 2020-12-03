@@ -25,8 +25,8 @@ function createData(name, calories, fat, carbs, protein) {
 
 export default function BasicTable() {
   const classes = useStyles();
-  const [stateUsername, setstateUsername] = useState("Adi Strauss");
-  const [statePassword, setstatePassword] = useState("12345678");
+  const [stateUsername, setstateUsername] = useState("Nevo Strauss");
+  const [statePassword, setstatePassword] = useState("071093");
   const [stateAuth, setstateAuth] = useState("CEO");
   const rows = [
     createData("Username", `${stateUsername}`),
