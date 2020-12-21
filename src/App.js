@@ -8,6 +8,7 @@ import { Route, Switch } from "react-router-dom";
 import Theme from "./Theme";
 import { useHistory } from "react-router-dom";
 import Splash from "./pages/splash";
+import StatusSetting from "./pages/StatusSettings";
 var socket;
 
 
@@ -46,6 +47,11 @@ export default function App() {
               exact
               path="/SignInPage"
               render={(props) => <SignInPage {...props} />}
+            />
+            <Route
+                exact
+                path="/StatusSettings"
+                render={(props) => <StatusSetting {...props} />}
             />
           </Switch>
         </div>

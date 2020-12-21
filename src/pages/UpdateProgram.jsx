@@ -8,7 +8,7 @@ import Button from "@material-ui/core/Button";
 import * as io from "socket.io-client";
 import Commands from "../components/Commands";
 import Autocomplete from "@material-ui/lab/Autocomplete";
-import { Card, CardContent, TextField } from "@material-ui/core";
+import { TextField } from "@material-ui/core";
 import MsgCard from "../components/MsgCard";
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -207,8 +207,6 @@ const UpdateProgram = () => {
           });
         }
       } else if (stateCommandsV === "BL_MEM_WRITE") {
-        // open dialog with title = "are you sure you want to..."
-        // if no - return
 
         if (!isFileName) {
           setusermsg("empty field");
@@ -249,7 +247,6 @@ const UpdateProgram = () => {
           setloading(true);
           socket.emit("execute_command", {
             port_name: stateCommandsPortsV,
-            // port_name: "COM3",
             controller_name: stateControllersV,
             command_name: stateCommandsV,
             additional_parameters: {},

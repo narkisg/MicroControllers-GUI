@@ -1,5 +1,5 @@
-// eslint-disable-next-line no-unused-vars
-import { Box, Typography, Button, IconButton } from "@material-ui/core";
+
+import { Box, Button} from "@material-ui/core";
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import SaveIcon from "@material-ui/icons/Save";
@@ -48,9 +48,9 @@ const NavBar = (props) => {
       onClick: () => history.push("/MyProfile"),
     },
     {
-      text: "Settings",
+      text: "Status Settings",
       auth: [1, 2, 3],
-      onClick: () => history.push("/Settings"),
+      onClick: () => history.push("/StatusSettings"),
     },
   ];
 
