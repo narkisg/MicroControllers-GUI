@@ -1,5 +1,4 @@
 import {
-  Button,
   Card,
   CardContent,
   CircularProgress,
@@ -12,8 +11,6 @@ export default function MsgCard(props) {
   const sampleJSON = {
     object: process,
   };
-  const booli = false;
-
   return (
     <div>
       {!loading && (

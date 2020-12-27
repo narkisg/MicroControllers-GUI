@@ -39,7 +39,7 @@ const ensureCommands = ['BL_FLASH_MASS_ERASE','BL_FLASH_ERASE','BL_MEM_WRITE',
                             'BL_OTP_READ','BL_DIS_R_W_PROTECT', 'BL_MY_NEW_COMMAND']
 
 const UpdateProgram = () => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const classes = useStyles();
   const [usermsg, setusermsg] = useState("");
@@ -142,6 +142,7 @@ const UpdateProgram = () => {
     });
     return () => socket.off("list_of_controllers_response");
   }, []);
+
   useEffect(() => {
     socket.on("list_of_ports_response", (reply) => {
       if (reply) {
@@ -153,6 +154,7 @@ const UpdateProgram = () => {
     });
     return () => socket.off("list_of_ports_response");
   }, []);
+
   useEffect(() => {
     socket.on("execute_command_response", (reply) => {
       setloading(false);
@@ -168,12 +170,15 @@ const UpdateProgram = () => {
   useEffect(() => {
     socket.emit("get_list_of_commands", () => {});
   }, []);
+
   useEffect(() => {
     socket.emit("get_list_of_controllers", () => {});
   }, []);
+
   useEffect(() => {
     socket.emit("get_list_of_ports", () => {});
   }, []);
+
   const onSubmitFunc = (e) => {
     e.preventDefault();
 

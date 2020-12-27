@@ -7,7 +7,6 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Container from "@material-ui/core/Container";
-// eslint-disable-next-line no-unused-vars
 import NavBar from "../components/NavBar";
 import * as io from "socket.io-client";
 var socket;
