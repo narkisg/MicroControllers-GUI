@@ -14,7 +14,11 @@ let socket;
 
 const AllControllersMap = () => {
     const createRow = (key,value) => {
-        const newVal = value.toString()
+        let arrayList = [];
+        for (const controller of value){
+            arrayList.push(controller.toString()+" ")
+        }
+        const newVal = arrayList.toString()
         return{key,newVal}
     }
 
@@ -61,7 +65,7 @@ const AllControllersMap = () => {
 
     return (
         <TableContainer component={Paper}>
-            {loading?<CircularProgress />:null}
+            {loading?<div align="center"><CircularProgress  /></div>:null}
             <Table className={classes.table} aria-label="simple table">
                 <TableHead>
                     <TableRow>

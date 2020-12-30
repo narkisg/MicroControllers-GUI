@@ -21,15 +21,19 @@ function DisplaySpecifiedPorts(props){
     const [stateCommandsPortsV, setstateCommandsPortsV] = useState("");
     const [stateCommandsPorts, setstateCommandsPorts] = useState([""]);
 
-    const [toDisplay, setToDisplay] = useState(false)
+    const [toDisplayButton, settoDisplayButton] = useState(false)
+    const [toDisplayDropdown, settoDisplayDropdown] = useState(true)
+
     const { onClose, open } = props;
     const handleClose = () => {
         onClose();
-        setToDisplay(false)
+        settoDisplayButton(false)
+        settoDisplayDropdown(true)
     };
 
     const renderControllersMap = () => {
-        setToDisplay(true);
+        settoDisplayButton(true)
+        settoDisplayDropdown(false)
     }
 
     const styles = (theme) => ({
@@ -98,11 +102,13 @@ function DisplaySpecifiedPorts(props){
                 <DialogTitle id="customized-dialog-title" onClose={handleClose}>
                     Controllers Mapping By Port
                 </DialogTitle>
+                {toDisplayDropdown?
                 <DialogContent dividers>
                     <Typography gutterBottom>
                         Choose Port and Press 'Discover' to see it's controllers mapping.
                     </Typography>
-                </DialogContent>
+                </DialogContent>:null}
+                {toDisplayDropdown?
                 <DialogContent dividers>
                     <Autocomplete
                         value={stateCommandsPortsV}
@@ -116,9 +122,9 @@ function DisplaySpecifiedPorts(props){
                             <TextField {...params} label="ports" variant="outlined" />
                         )}
                     />
-                </DialogContent>
+                </DialogContent>:null}
                 <DialogActions>
-                    {toDisplay? <PortControllersMap port={stateCommandsPortsV}/>:
+                    {toDisplayButton? <PortControllersMap port={stateCommandsPortsV}/>:
                     <Button autoFocus onClick={renderControllersMap} color="primary">
                         Discover
                     </Button>}

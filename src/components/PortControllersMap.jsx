@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from "react";
-import * as io from "socket.io-client";
 import {makeStyles} from "@material-ui/core/styles";
 import TableContainer from "@material-ui/core/TableContainer";
 import Paper from "@material-ui/core/Paper";
@@ -10,10 +9,12 @@ import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
 
+import * as io from "socket.io-client";
 let socket;
 
 const PortControllersMap = (props) =>{
-    const [cotrollersList, setCotrollersList] = useState({})
+    const port = props.port
+    const [cotrollersMap, setCotrollersMap] = useState({})
     const [row, setRow] = useState([])
     const [loading, setLoading] = useState(true)
 
@@ -26,7 +27,7 @@ const PortControllersMap = (props) =>{
     useEffect(() => {
         socket.on("discover_controllers_status_by_port_response", (reply) => {
             if (reply) {
-                setCotrollersList(JSON.parse(reply))
+                setCotrollersMap(JSON.parse(reply))
                 setLoading(false)
             }
             return () => socket.off("discover_controllers_status_by_port_response");
@@ -35,13 +36,29 @@ const PortControllersMap = (props) =>{
 
     useEffect(() => {
         console.log("emitting")
-        socket.emit("discover_controllers_status_by_port", () => {
+        socket.emit("discover_controllers_status_by_port",{
+            port: port
         });
     }, []);
 
+    const createRow = (key,value) => {
+        let arrayList = [];
+        for (const controller of value){
+            arrayList.push(controller.toString()+" ")
+        }
+        const newVal = arrayList.toString()
+        return{key,newVal}
+    }
+
     useEffect(()=>{
-        setRow(row => row.concat(cotrollersList))
-    },[cotrollersList])
+        console.log(cotrollersMap)
+        let data = [];
+        for (const [key, value] of Object.entries(cotrollersMap)) {
+            data.push(createRow(key,value))
+        }
+        setRow(rows=>rows.concat(data))
+    },[cotrollersMap])
+
 
 
     const useStyles = makeStyles({
@@ -54,7 +71,7 @@ const PortControllersMap = (props) =>{
 
     return(
         <TableContainer component={Paper}>
-            {loading?<CircularProgress />:null}
+            {loading?<div align="center"><CircularProgress /></div>:null}
             <Table className={classes.table} aria-label="simple table">
                 <TableHead>
                     <TableRow>
@@ -63,12 +80,14 @@ const PortControllersMap = (props) =>{
                     </TableRow>
                 </TableHead>
                 <TableBody>
+                    {row.map((row) => (
                         <TableRow key={row.key}>
                             <TableCell component="th" scope="row">
-                                {props.port}
+                                {row.key}
                             </TableCell>
-                            <TableCell align="right">{row}</TableCell>
+                            <TableCell align="right">{row.newVal}</TableCell>
                         </TableRow>
+                    ))}
                 </TableBody>
             </Table>
         </TableContainer>

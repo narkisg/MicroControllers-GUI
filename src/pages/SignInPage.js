@@ -46,24 +46,18 @@ export default function LoginPage() {
   useEffect(() => {
     socket.on("login_response", (reply) => {
       if (reply.success === "true") {
-        // moving to a difrent page:
-        // alert(reply.message);
-        // then:
         history.push("/");
       } else {
-        console.log(reply.message);
         setError(reply.message);
       }
     });
     return () => {
       socket.off("login_response")
     }
-
   }, []);
 
 
   const onSubmitFunc = (e) => {
-    console.log('====here =====')
     e.preventDefault();
     const { username, password } = state;
     socket.emit("login_attempt", {
@@ -85,7 +79,6 @@ export default function LoginPage() {
         </h1>
         <br />
         <img src="netafim-logo.png" alt="logo" height="70"></img>
-
         <form onSubmit={onSubmitFunc} className={classes.form} noValidate>
           <TextField
             variant="outlined"

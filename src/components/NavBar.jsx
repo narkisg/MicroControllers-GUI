@@ -3,13 +3,15 @@ import { Box, Button} from "@material-ui/core";
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import SaveIcon from "@material-ui/icons/Save";
+import AutorenewIcon from '@material-ui/icons/Autorenew';
 import * as io from "socket.io-client";
+
 var socket;
 
 
 const NavBar = (props) => {
   const [userAuth, setuserAuth] = useState(3);
-  const { history } = props;
+  const { history } = props
 
   // socket io:
   useEffect(() => {
@@ -22,6 +24,12 @@ const NavBar = (props) => {
     socket.emit("logout_attempt");
     history.push("/SignInPage");
   };
+
+  const onSwitch = (e) => {
+    e.preventDefault();
+    history.push("/");
+  };
+
   useEffect(() => {
     socket.on("my_profile_response", (reply) => {
       var object = JSON.parse(reply);
@@ -68,6 +76,16 @@ const NavBar = (props) => {
               </Button>
             );
           })}
+      </Box>
+      <Box flexGrow={1} textAlign="right" >
+        <Button
+            onClick={onSwitch}
+            variant="contained"
+            color="primary"
+            size="small"
+            startIcon={<AutorenewIcon />}>
+          Switch
+        </Button>
       </Box>
       <Box flexGrow={1} textAlign="right">
         <Button

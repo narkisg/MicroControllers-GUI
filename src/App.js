@@ -1,4 +1,4 @@
-import React, { useEffect  } from "react";
+import React from "react";
 import "./styles.css";
 import UpdateProgram from "./pages/UpdateProgram";
 import SignInPage from "./pages/SignInPage";
@@ -9,53 +9,51 @@ import Theme from "./Theme";
 import { useHistory } from "react-router-dom";
 import Splash from "./pages/splash";
 import StatusSetting from "./pages/StatusSettings";
-var socket;
-
-
 export default function App() {
+
   const history = useHistory();
 
   history.push("/Splash");
 
   return (
-    <Theme>
-      <div>
+      <Theme>
         <div>
-          <Switch>
-            <Route
-              exact
-              from="/"
-              render={(props) => <UpdateProgram {...props} />}
-            />
-            <Route
-                exact
-                from="/Splash"
-                render={(props) => <Splash {...props} />}
-            />
+          <div>
+            <Switch>
+              <Route
+                  exact
+                  from="/"
+                  render={(props) => <UpdateProgram {...props} />}
+              />
+              <Route
+                  exact
+                  from="/Splash"
+                  render={(props) => <Splash {...props} />}
+              />
 
-            <Route
-              exact
-              path="/UserManagement"
-              render={(props) => <UserManagement {...props} />}
-            />
-            <Route
-              exact
-              path="/MyProfile"
-              render={(props) => <MyProfile {...props} />}
-            />
-            <Route
-              exact
-              path="/SignInPage"
-              render={(props) => <SignInPage {...props} />}
-            />
-            <Route
-                exact
-                path="/StatusSettings"
-                render={(props) => <StatusSetting {...props} />}
-            />
-          </Switch>
+              <Route
+                  exact
+                  path="/UserManagement"
+                  render={(props) => <UserManagement {...props} />}
+              />
+              <Route
+                  exact
+                  path="/MyProfile"
+                  render={(props) => <MyProfile {...props} />}
+              />
+              <Route
+                  exact
+                  path="/SignInPage"
+                  render={(props) => <SignInPage {...props} />}
+              />
+              <Route
+                  exact
+                  path="/StatusSettings"
+                  render={(props) => <StatusSetting {...props} />}
+              />
+            </Switch>
+          </div>
         </div>
-      </div>
-    </Theme>
+      </Theme>
   );
 }

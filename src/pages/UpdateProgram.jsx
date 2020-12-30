@@ -5,7 +5,6 @@ import NavBar from "../components/NavBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
-import * as io from "socket.io-client";
 import Commands from "../components/Commands";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { TextField } from "@material-ui/core";
@@ -16,6 +15,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
+import * as io from "socket.io-client";
 var socket;
 
 const useStyles = makeStyles((theme) => ({
@@ -38,8 +38,12 @@ const ensureCommands = ['BL_FLASH_MASS_ERASE','BL_FLASH_ERASE','BL_MEM_WRITE',
                             'BL_EN_R_W_PROTECT','BL_MEM_READ','BL_READ_SECTOR_P_STATUS',
                             'BL_OTP_READ','BL_DIS_R_W_PROTECT', 'BL_MY_NEW_COMMAND']
 
-const UpdateProgram = () => {
+
+const UpdateProgram = (props) => {
   const [open, setOpen] = useState(false);
+
+  const [switchToUnit, setSwitchToUnit] = useState(false)
+  const myGlobalVar = React.createContext({state:false, setState: ()=>{},})
 
   const classes = useStyles();
   const [usermsg, setusermsg] = useState("");
@@ -317,7 +321,7 @@ const UpdateProgram = () => {
   }
   return (
     <div>
-      <NavBar />
+      <NavBar glob={myGlobalVar}/>
       <Grid container spacing={3}>
         <Grid item xs={6}>
           <Container component="main" maxWidth="xs">
@@ -339,7 +343,6 @@ const UpdateProgram = () => {
                   )}
                 />
                 <br />
-
                 <Autocomplete
                   value={stateControllersV}
                   fullWidth

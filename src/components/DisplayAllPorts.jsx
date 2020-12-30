@@ -16,13 +16,16 @@ function DisplayAllPorts(props) {
     const {onClose, open} = props;
     const handleClose = () => {
         onClose();
-        setToDisplay(false)
+        setToDisplayButton(false)
+        setToDisplayText(true)
     };
 
-    const [toDisplay, setToDisplay] = useState(false)
+    const [toDisplayButton, setToDisplayButton] = useState(false)
+    const [toDisplayText, setToDisplayText] = useState(true)
 
     const renderControllersMap = () => {
-        setToDisplay(true);
+        setToDisplayButton(true)
+        setToDisplayText(false)
     }
 
     const styles = (theme) => ({
@@ -71,13 +74,14 @@ function DisplayAllPorts(props) {
                 <DialogTitle id="customized-dialog-title" onClose={handleClose}>
                     Controllers Mapping
                 </DialogTitle>
+                {toDisplayText?
                 <DialogContent dividers>
                     <Typography gutterBottom>
                         Press 'Discover' to see the controllers mapping.
                     </Typography>
-                </DialogContent>
+                </DialogContent>:null}
                 <DialogActions>
-                    {toDisplay?<AllControllersMap />:
+                    {toDisplayButton?<AllControllersMap />:
                         <Button autoFocus onClick={renderControllersMap} color="primary">
                             Discover
                         </Button>}
