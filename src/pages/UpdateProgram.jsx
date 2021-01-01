@@ -188,7 +188,7 @@ const UpdateProgram = () => {
 
     // if there is empty fields:
 
-    if (!stateCommandsPortsV || !stateControllersV || !stateCommandsV) {
+    if (!stateCommandsPortsV || (isNeedToSwitch & !stateControllersV) || !stateCommandsV) {
       setusermsg("empty field");
     } else {
       setfinishcode(true);
