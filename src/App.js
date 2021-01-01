@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import "./styles.css";
 import UpdateProgram from "./pages/UpdateProgram";
 import SignInPage from "./pages/SignInPage";
@@ -9,28 +9,31 @@ import Theme from "./Theme";
 import { useHistory } from "react-router-dom";
 import Splash from "./pages/splash";
 import StatusSetting from "./pages/StatusSettings";
+import {UnitTestContext} from "./components/UnitTestContext";
+
 export default function App() {
 
   const history = useHistory();
-
   history.push("/Splash");
 
+  const [switchStatus, setSwitchStatus] = useState(true)
+  const makeSwitch = {
+    switchStatus:switchStatus,
+    setSwitchStatus:setSwitchStatus
+  }
+
   return (
-      <Theme>
+      <UnitTestContext.Provider value={makeSwitch}>
+      <Theme >
         <div>
           <div>
             <Switch>
               <Route
                   exact
                   from="/"
-                  render={(props) => <UpdateProgram {...props} />}
+                  render={(props) =>
+                        <UpdateProgram {...props} />}
               />
-              <Route
-                  exact
-                  from="/Splash"
-                  render={(props) => <Splash {...props} />}
-              />
-
               <Route
                   exact
                   path="/UserManagement"
@@ -43,17 +46,24 @@ export default function App() {
               />
               <Route
                   exact
-                  path="/SignInPage"
-                  render={(props) => <SignInPage {...props} />}
+                  path="/StatusSettings"
+                  render={(props) =>
+                    <StatusSetting {...props} />}
               />
               <Route
                   exact
-                  path="/StatusSettings"
-                  render={(props) => <StatusSetting {...props} />}
+                  from="/Splash"
+                  render={(props) => <Splash {...props} />}
+              />
+              <Route
+                  exact
+                  path="/SignInPage"
+                  render={(props) => <SignInPage {...props} />}
               />
             </Switch>
           </div>
         </div>
       </Theme>
+      </UnitTestContext.Provider>
   );
 }

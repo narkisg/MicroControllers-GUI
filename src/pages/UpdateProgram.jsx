@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import NavBar from "../components/NavBar";
@@ -14,6 +14,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import {UnitTestContext} from "../components/UnitTestContext";
 
 import * as io from "socket.io-client";
 var socket;
@@ -39,11 +40,8 @@ const ensureCommands = ['BL_FLASH_MASS_ERASE','BL_FLASH_ERASE','BL_MEM_WRITE',
                             'BL_OTP_READ','BL_DIS_R_W_PROTECT', 'BL_MY_NEW_COMMAND']
 
 
-const UpdateProgram = (props) => {
+const UpdateProgram = () => {
   const [open, setOpen] = useState(false);
-
-  const [switchToUnit, setSwitchToUnit] = useState(false)
-  const myGlobalVar = React.createContext({state:false, setState: ()=>{},})
 
   const classes = useStyles();
   const [usermsg, setusermsg] = useState("");
@@ -69,6 +67,8 @@ const UpdateProgram = (props) => {
   const [loading, setloading] = useState(false);
   const [finishcode, setfinishcode] = useState(false);
   const [portmsg, setportmsg] = useState("");
+
+ const isNeedToSwitch = useContext(UnitTestContext)
 
   // socket io:
   useEffect(() => {
@@ -321,7 +321,7 @@ const UpdateProgram = (props) => {
   }
   return (
     <div>
-      <NavBar glob={myGlobalVar}/>
+      <NavBar />
       <Grid container spacing={3}>
         <Grid item xs={6}>
           <Container component="main" maxWidth="xs">
@@ -343,6 +343,7 @@ const UpdateProgram = (props) => {
                   )}
                 />
                 <br />
+                {isNeedToSwitch.switchStatus?
                 <Autocomplete
                   value={stateControllersV}
                   fullWidth
@@ -358,7 +359,7 @@ const UpdateProgram = (props) => {
                       variant="outlined"
                     />
                   )}
-                />
+                />:null}
                 <br />
 
                 <Autocomplete
