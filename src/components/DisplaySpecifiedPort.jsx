@@ -103,31 +103,31 @@ function DisplaySpecifiedPorts(props){
                     Controllers Mapping By Port
                 </DialogTitle>
                 {toDisplayDropdown?
-                <DialogContent dividers>
-                    <Typography gutterBottom>
-                        Choose Port and Press 'Discover' to see it's controllers mapping.
-                    </Typography>
-                </DialogContent>:null}
+                    <DialogContent dividers>
+                        <Typography gutterBottom>
+                            Choose Port and Press 'Discover' to see it's controllers mapping.
+                        </Typography>
+                    </DialogContent>:null}
                 {toDisplayDropdown?
-                <DialogContent dividers>
-                    <Autocomplete
-                        value={stateCommandsPortsV}
-                        fullWidth
-                        onChange={(event, newValue) => {
-                            setstateCommandsPortsV(newValue);
-                        }}
-                        id="ports"
-                        options={stateCommandsPorts}
-                        renderInput={(params) => (
-                            <TextField {...params} label="ports" variant="outlined" />
-                        )}
-                    />
-                </DialogContent>:null}
+                    <DialogContent dividers>
+                        <Autocomplete
+                            value={stateCommandsPortsV}
+                            fullWidth
+                            onChange={(event, newValue) => {
+                                setstateCommandsPortsV(newValue);
+                            }}
+                            id="ports"
+                            options={stateCommandsPorts}
+                            renderInput={(params) => (
+                                <TextField {...params} label="ports" variant="outlined" />
+                            )}
+                        />
+                    </DialogContent>:null}
                 <DialogActions>
                     {toDisplayButton? <PortControllersMap port={stateCommandsPortsV}/>:
-                    <Button autoFocus onClick={renderControllersMap} color="primary">
-                        Discover
-                    </Button>}
+                        <Button autoFocus onClick={renderControllersMap} color="primary">
+                            Discover
+                        </Button>}
                     <Button autoFocus onClick={handleClose} color="primary">
                         Cancel
                     </Button>

@@ -139,89 +139,89 @@ export default function EditUser() {
   };
 
   return (
-    <div>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <div>
-          <h1>
-            Edit User
-          </h1>
-          <form onSubmit={onSubmitFunc} className={classes.form} noValidate>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <Autocomplete
-                  value={userValue}
-                  fullWidth
-                  onChange={(event, newValue) => {
-                    setUserValue(newValue);
-                  }}
-                  id="user"
-                  options={stateUsersList}
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      label="Users List"
+      <div>
+        <Container component="main" maxWidth="xs">
+          <CssBaseline />
+          <div>
+            <h1>
+              Edit User
+            </h1>
+            <form onSubmit={onSubmitFunc} className={classes.form} noValidate>
+              <Grid container spacing={2}>
+                <Grid item xs={12}>
+                  <Autocomplete
+                      value={userValue}
+                      fullWidth
+                      onChange={(event, newValue) => {
+                        setUserValue(newValue);
+                      }}
+                      id="user"
+                      options={stateUsersList}
+                      renderInput={(params) => (
+                          <TextField
+                              {...params}
+                              label="Users List"
+                              variant="outlined"
+                          />
+                      )}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
                       variant="outlined"
-                    />
-                  )}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  fullWidth
-                  id="email"
-                  label="new username (optional)"
-                  name="email"
-                  onChange={(e) => setNewUserName(e.target.value)}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  fullWidth
-                  id="email"
-                  label="new password (optional)"
-                  name="email"
-                  onChange={(e) => setnewPassword(e.target.value)}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <FormControl
-                  fullWidth
-                  variant="outlined"
-                  className={classes.formControl}>
-                  <InputLabel id="demo-simple-select-outlined-label">
-                    new user authorization (optional)
-                  </InputLabel>
-                  <Select
-                    labelId="demo-simple-select-outlined-label"
-                    id="demo-simple-select-outlined"
-                    value={age}
-                    onChange={handleChange}
-                    label="new user
+                      fullWidth
+                      id="email"
+                      label="new username (optional)"
+                      name="email"
+                      onChange={(e) => setNewUserName(e.target.value)}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                      variant="outlined"
+                      fullWidth
+                      id="email"
+                      label="new password (optional)"
+                      name="email"
+                      onChange={(e) => setnewPassword(e.target.value)}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <FormControl
+                      fullWidth
+                      variant="outlined"
+                      className={classes.formControl}>
+                    <InputLabel id="demo-simple-select-outlined-label">
+                      new user authorization (optional)
+                    </InputLabel>
+                    <Select
+                        labelId="demo-simple-select-outlined-label"
+                        id="demo-simple-select-outlined"
+                        value={age}
+                        onChange={handleChange}
+                        label="new user
                     authorization (optional)">
-                    <MenuItem value={1}>simple user</MenuItem>
-                    <MenuItem value={2}>developer</MenuItem>
-                    <MenuItem value={3}>administrator</MenuItem>
-                  </Select>
-                </FormControl>
+                      <MenuItem value={1}>simple user</MenuItem>
+                      <MenuItem value={2}>developer</MenuItem>
+                      <MenuItem value={3}>administrator</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
               </Grid>
-            </Grid>
-            <h5>{usermsg2}</h5>
-            <h5>{usermsg1}</h5>
-            <h5>{usermsg3}</h5>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}>
-              Edit User Details
-            </Button>
-          </form>
-        </div>
-      </Container>
-    </div>
+              <h5>{usermsg2}</h5>
+              <h5>{usermsg1}</h5>
+              <h5>{usermsg3}</h5>
+              <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className={classes.submit}>
+                Edit User Details
+              </Button>
+            </form>
+          </div>
+        </Container>
+      </div>
   );
 }

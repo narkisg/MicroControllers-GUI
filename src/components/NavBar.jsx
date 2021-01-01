@@ -68,41 +68,41 @@ const NavBar = (props) => {
   ];
 
   return (
-    <Box display="flex" bgcolor="grey.200" p={2} alignItems="center">
-      <img src="netafim-logo.png" alt="logo" height="40"/>
-      <Box>
-        {itemsList
-          .filter((user) => user.auth.includes(userAuth))
-          .map((item, index) => {
-            const { text, userauthi, onClick } = item;
-            return (
-              <Button color="primary" onClick={onClick} key={index}>
-                {text}
-              </Button>
-            );
-          })}
+      <Box display="flex" bgcolor="grey.200" p={2} alignItems="center">
+        <img src="netafim-logo.png" alt="logo" height="40"/>
+        <Box>
+          {itemsList
+              .filter((user) => user.auth.includes(userAuth))
+              .map((item, index) => {
+                const { text, userauthi, onClick } = item;
+                return (
+                    <Button color="primary" onClick={onClick} key={index}>
+                      {text}
+                    </Button>
+                );
+              })}
+        </Box>
+        <Box flexGrow={100} textAlign="right">
+          <Button
+              onClick={onSwitch}
+              variant="contained"
+              color="primary"
+              size="small"
+              startIcon={<AutorenewIcon />}>
+            Unit Test
+          </Button>
+        </Box>
+        <Box flexGrow={1} textAlign="right">
+          <Button
+              onClick={onLogout}
+              variant="contained"
+              color="primary"
+              size="small"
+              startIcon={<SaveIcon />}>
+            Logout
+          </Button>
+        </Box>
       </Box>
-      <Box flexGrow={100} textAlign="right">
-        <Button
-            onClick={onSwitch}
-            variant="contained"
-            color="primary"
-            size="small"
-            startIcon={<AutorenewIcon />}>
-          Unit Test
-        </Button>
-      </Box>
-      <Box flexGrow={1} textAlign="right">
-        <Button
-          onClick={onLogout}
-          variant="contained"
-          color="primary"
-          size="small"
-          startIcon={<SaveIcon />}>
-          Logout
-        </Button>
-      </Box>
-    </Box>
   );
 };
 

@@ -1,15 +1,8 @@
 import React, { useState, useEffect } from "react";
-import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import * as io from "socket.io-client";
@@ -99,88 +92,88 @@ export default function NewUser() {
   };
 
   return (
-    <div>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <div>
-          <h1>Create user</h1>
-          <br />
-          <form onSubmit={onSubmitFunc} noValidate>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  label="New User Name"
-                  name="username"
-                  id="username"
-                  onChange={(e) => onInputChange(e)}
-                  value={state.username}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  label="New Password"
-                  type="password"
-                  name="password"
-                  id="password"
-                  onChange={(e) => onInputChange(e)}
-                  value={state.password}
-                />
-              </Grid>
+      <div>
+        <Container component="main" maxWidth="xs">
+          <CssBaseline />
+          <div>
+            <h1>Create user</h1>
+            <br />
+            <form onSubmit={onSubmitFunc} noValidate>
+              <Grid container spacing={2}>
+                <Grid item xs={12}>
+                  <TextField
+                      variant="outlined"
+                      required
+                      fullWidth
+                      label="New User Name"
+                      name="username"
+                      id="username"
+                      onChange={(e) => onInputChange(e)}
+                      value={state.username}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                      variant="outlined"
+                      required
+                      fullWidth
+                      label="New Password"
+                      type="password"
+                      name="password"
+                      id="password"
+                      onChange={(e) => onInputChange(e)}
+                      value={state.password}
+                  />
+                </Grid>
 
-              <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  label="Confirm Password"
-                  type="password"
-                  name="passwordConfirm"
-                  id="passwordConfirm"
-                  onChange={(e) => onInputChange(e)}
-                  value={state.passwordConfirm}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                {" "}
-                <FormControl
-                  fullWidth
-                  variant="outlined"
-                  className={classes.formControl}>
-                  <InputLabel id="demo-simple-select-outlined-label">
-                    new user authorization (optional)
-                  </InputLabel>
-                  <Select
-                    labelId="demo-simple-select-outlined-label"
-                    id="demo-simple-select-outlined"
-                    value={authcode}
-                    onChange={handleChange}
-                    label="new user
+                <Grid item xs={12}>
+                  <TextField
+                      variant="outlined"
+                      required
+                      fullWidth
+                      label="Confirm Password"
+                      type="password"
+                      name="passwordConfirm"
+                      id="passwordConfirm"
+                      onChange={(e) => onInputChange(e)}
+                      value={state.passwordConfirm}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  {" "}
+                  <FormControl
+                      fullWidth
+                      variant="outlined"
+                      className={classes.formControl}>
+                    <InputLabel id="demo-simple-select-outlined-label">
+                      new user authorization (optional)
+                    </InputLabel>
+                    <Select
+                        labelId="demo-simple-select-outlined-label"
+                        id="demo-simple-select-outlined"
+                        value={authcode}
+                        onChange={handleChange}
+                        label="new user
                     authorization (optional)">
-                    <MenuItem value={1}>simple user</MenuItem>
-                    <MenuItem value={2}>developer</MenuItem>
-                    <MenuItem value={3}>administrator</MenuItem>
-                  </Select>
-                </FormControl>
+                      <MenuItem value={1}>simple user</MenuItem>
+                      <MenuItem value={2}>developer</MenuItem>
+                      <MenuItem value={3}>administrator</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
               </Grid>
-            </Grid>
-            <h5>{usermsg}</h5>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}>
-              Create New User
-            </Button>
-          </form>
-        </div>
-      </Container>
-    </div>
+              <h5>{usermsg}</h5>
+              <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className={classes.submit}>
+                Create New User
+              </Button>
+            </form>
+          </div>
+        </Container>
+      </div>
   );
 }

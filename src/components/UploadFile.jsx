@@ -1,5 +1,4 @@
 import React from "react";
-
 export default function UploadFile(props) {
   // State to store uploaded file
 

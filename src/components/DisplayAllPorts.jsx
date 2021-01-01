@@ -1,4 +1,4 @@
-import React, { useState,CircularProgress } from "react";
+import React, { useState} from "react";
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { withStyles } from '@material-ui/core/styles';
@@ -75,11 +75,11 @@ function DisplayAllPorts(props) {
                     Controllers Mapping
                 </DialogTitle>
                 {toDisplayText?
-                <DialogContent dividers>
-                    <Typography gutterBottom>
-                        Press 'Discover' to see the controllers mapping.
-                    </Typography>
-                </DialogContent>:null}
+                    <DialogContent dividers>
+                        <Typography gutterBottom>
+                            Press 'Discover' to see the controllers mapping.
+                        </Typography>
+                    </DialogContent>:null}
                 <DialogActions>
                     {toDisplayButton?<AllControllersMap />:
                         <Button autoFocus onClick={renderControllersMap} color="primary">

@@ -54,27 +54,27 @@ export default function BasicTable() {
   }, []);
 
   return (
-    <div>
-      <NavBar />
-      <Container component="main" maxWidth="md">
-        <br />
-        <h1>My Profile</h1>
-        <br />
-        <TableContainer component={Paper}>
-          <Table className={classes.table} aria-label="simple table">
-            <TableBody>
-              {rows.map((row) => (
-                <TableRow key={row.name}>
-                  <TableCell component="th" scope="row">
-                    {row.name}
-                  </TableCell>
-                  <TableCell align="right">{row.calories}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Container>
-    </div>
+      <div>
+        <NavBar />
+        <Container component="main" maxWidth="md">
+          <br />
+          <h1>My Profile</h1>
+          <br />
+          <TableContainer component={Paper}>
+            <Table className={classes.table} aria-label="simple table">
+              <TableBody>
+                {rows.map((row) => (
+                    <TableRow key={row.name}>
+                      <TableCell component="th" scope="row">
+                        {row.name}
+                      </TableCell>
+                      <TableCell align="right">{row.calories}</TableCell>
+                    </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Container>
+      </div>
   );
 }

@@ -102,66 +102,66 @@ export default function DeleteUser() {
   }
 
   return (
-    <div>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <div>
-          <h1>
-            Delete user
-          </h1>
-          <form onSubmit={handleClickOpen} className={classes.form} noValidate>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <Autocomplete
-                  value={value}
-                  fullWidth
-                  onChange={(event, newValue) => {
-                    setValue(newValue);
-                  }}
-                  id="user"
-                  options={stateUsersList}
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      label="Users List"
-                      variant="outlined"
-                    />
-                  )}
-                />
-              </Grid>
-            </Grid>
-            <h5>{usermsg}</h5>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}>
-              Delete User
-            </Button>
-          </form>
-        </div>
-      </Container>
       <div>
-        <Dialog
-            open={open}
-            onClose={handleClose}>
-          <DialogTitle id="alert-dialog-title">{"Delete user alert"}</DialogTitle>
-          <DialogContent>
-            <DialogContentText id="alert-dialog-description">
-              are you sure you want to delete this user?
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleClose} color="primary">
-              Cancel
-            </Button>
-            <Button onClick={handleProceed} color="primary" autoFocus>
-              Delete anyway
-            </Button>
-          </DialogActions>
-        </Dialog>
+        <Container component="main" maxWidth="xs">
+          <CssBaseline />
+          <div>
+            <h1>
+              Delete user
+            </h1>
+            <form onSubmit={handleClickOpen} className={classes.form} noValidate>
+              <Grid container spacing={2}>
+                <Grid item xs={12}>
+                  <Autocomplete
+                      value={value}
+                      fullWidth
+                      onChange={(event, newValue) => {
+                        setValue(newValue);
+                      }}
+                      id="user"
+                      options={stateUsersList}
+                      renderInput={(params) => (
+                          <TextField
+                              {...params}
+                              label="Users List"
+                              variant="outlined"
+                          />
+                      )}
+                  />
+                </Grid>
+              </Grid>
+              <h5>{usermsg}</h5>
+              <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className={classes.submit}>
+                Delete User
+              </Button>
+            </form>
+          </div>
+        </Container>
+        <div>
+          <Dialog
+              open={open}
+              onClose={handleClose}>
+            <DialogTitle id="alert-dialog-title">{"Delete user alert"}</DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                are you sure you want to delete this user?
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleClose} color="primary">
+                Cancel
+              </Button>
+              <Button onClick={handleProceed} color="primary" autoFocus>
+                Delete anyway
+              </Button>
+            </DialogActions>
+          </Dialog>
+        </div>
       </div>
-    </div>
   );
 }
