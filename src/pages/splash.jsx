@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useEffect} from "react";
 import './splash.scss'
 import * as io from "socket.io-client";
 import {useHistory} from "react-router-dom";

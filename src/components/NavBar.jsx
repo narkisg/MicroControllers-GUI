@@ -32,7 +32,7 @@ const NavBar = (props) => {
     const prevValue = UnitTestProps.switchStatus
     console.log({prevValue})
     UnitTestProps.setSwitchStatus(!prevValue)
-    history.push("/");  // go to update program page (push 'this')
+    history.push("/UpdateProgram");  // go to update program page (push 'this')
   };
 
   useEffect(() => {
@@ -48,7 +48,7 @@ const NavBar = (props) => {
     {
       text: "Update Program",
       auth: [1, 2, 3],
-      onClick: () => history.push("/"),
+      onClick: () => history.push("/UpdateProgram"),
     },
     {
       text: "User Management",

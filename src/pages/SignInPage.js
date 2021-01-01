@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
-import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import * as io from "socket.io-client";
@@ -46,7 +44,7 @@ export default function LoginPage() {
   useEffect(() => {
     socket.on("login_response", (reply) => {
       if (reply.success === "true") {
-        history.push("/");
+        history.push("/UpdateProgram");
       } else {
         setError(reply.message);
       }
