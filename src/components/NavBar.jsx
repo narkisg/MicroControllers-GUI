@@ -61,7 +61,7 @@ const NavBar = (props) => {
       onClick: () => history.push("/MyProfile"),
     },
     {
-      text: "Status Settings",
+      text: "Discover controllers",
       auth: [1, 2, 3],
       onClick: () => history.push("/StatusSettings"),
     },
