@@ -78,7 +78,7 @@ export default function NewUser() {
   const onSubmitFunc = (e) => {
     e.preventDefault();
     const { username, password, passwordConfirm } = state;
-    if (password != passwordConfirm) {
+    if (password !== passwordConfirm) {
       setusermsg("password error");
     } else if (!username || !password || !passwordConfirm || !authcode) {
       setusermsg("missing field");
